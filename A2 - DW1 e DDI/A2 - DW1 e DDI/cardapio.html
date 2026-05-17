@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio – Thayara Polizel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="topo-localizacao">📍 Retirada: Zona Sul – São Paulo, SP</div>
+
+  <nav class="navbar-thay">
+    <a href="index.html" class="brand">
+      <img src="fotos/LogoBarra.png" alt="Logo" onerror="this.style.display='none'">
+      Thayara Polizel
+    </a>
+    <button class="navbar-toggler-thay" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cardapio.html" class="active">Cardápio</a></li>
+      <li><a href="guia.html">Guia de Encomendas</a></li>
+      <li>
+        <a href="carrinho.html" class="carrinho-link" title="Carrinho">
+          🛒
+          <span class="badge-carrinho" style="display:none;">0</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Cabeçalho da página -->
+  <div style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo)); padding:40px 0 20px; text-align:center;">
+    <h1>Nosso Cardápio</h1>
+    <p class="subtitulo">Explore nossa vitrine de produtos artesanais de alta qualidade</p>
+  </div>
+
+  <!-- Filtro de categorias -->
+  <div class="container my-4 text-center">
+    <div class="d-flex gap-2 justify-content-center flex-wrap" id="filtros">
+      <button class="btn-thay btn-thay-primary ativo-filtro" data-cat="todos">Todos</button>
+      <button class="btn-thay btn-thay-outline" data-cat="brigadeiro">Brigadeiros</button>
+      <button class="btn-thay btn-thay-outline" data-cat="mini">Mini Doces</button>
+      <button class="btn-thay btn-thay-outline" data-cat="caixa">Caixas</button>
+    </div>
+  </div>
+
+  <!-- GRID DE PRODUTOS -->
+  <div class="container pb-5">
+    <div class="row g-4" id="grid-produtos">
+
+      <!-- Os cards são gerados pelo JS abaixo para evitar repetição -->
+
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <div class="rodape">
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><img src="fotos/IconInstagram.png" alt="Instagram" onerror="this.parentElement.textContent='📸'"></a>
+      <a href="https://wa.me/5511999999999" target="_blank"><img src="fotos/IconWhatsapp.png" alt="WhatsApp" onerror="this.parentElement.textContent='💬'"></a>
+    </div>
+    <p style="margin:0;font-size:13px;color:var(--rosa-pastel);">&copy; 2026 Thayara Polizel – Confeitaria Artesanal</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="carrinho.js"></script>
+  <script>
+    // ── CATÁLOGO DE PRODUTOS ──────────────────────────────────────
+    const produtos = [
+      { id: 1,  nome: 'Brigadeiros Clássicos',          preco: 4.50,  img: 'fotos/img/1.png',  cat: 'brigadeiro' },
+      { id: 2,  nome: 'Brigadeiros Especiais',           preco: 5.50,  img: 'fotos/img/2.png',  cat: 'brigadeiro' },
+      { id: 3,  nome: 'Surpresa de Uva',                 preco: 5.00,  img: 'fotos/img/3.png',  cat: 'brigadeiro' },
+      { id: 4,  nome: 'Brigadeiros Premium',             preco: 7.00,  img: 'fotos/img/4.png',  cat: 'brigadeiro' },
+      { id: 5,  nome: 'Brigadeiro Floral',               preco: 6.50,  img: 'fotos/img/5.png',  cat: 'brigadeiro' },
+      { id: 6,  nome: 'Camafeu com Chocolate',           preco: 6.00,  img: 'fotos/img/6.png',  cat: 'brigadeiro' },
+      { id: 7,  nome: 'Bombom de Cereja',                preco: 6.00,  img: 'fotos/img/7.png',  cat: 'caixa'      },
+      { id: 8,  nome: 'Caixa de Pistache',               preco: 12.00, img: 'fotos/img/8.png',  cat: 'caixa'      },
+      { id: 9,  nome: 'Caixa de Uva',                    preco: 11.00, img: 'fotos/img/9.png',  cat: 'caixa'      },
+      { id: 10, nome: 'Coração Aberto',                  preco: 18.00, img: 'fotos/img/10.png', cat: 'caixa'      },
+      { id: 11, nome: 'Coração Fechado',                 preco: 20.00, img: 'fotos/img/11.png', cat: 'caixa'      },
+      { id: 12, nome: 'Pirâmide de Frutas Vermelhas',    preco: 22.00, img: 'fotos/img/12.png', cat: 'caixa'      },
+      { id: 13, nome: 'Pirulito de Chocolate',           preco: 5.00,  img: 'fotos/img/13.png', cat: 'mini'       },
+      { id: 14, nome: 'Bem Casado de Colher',            preco: 6.50,  img: 'fotos/img/14.png', cat: 'mini'       },
+      { id: 15, nome: 'Cake Pop Quadrado',               preco: 6.00,  img: 'fotos/img/15.png', cat: 'mini'       },
+      { id: 16, nome: 'Mini Bolo de Cenoura',            preco: 14.00, img: 'fotos/img/16.png', cat: 'mini'       },
+      { id: 17, nome: 'Mini Bombom de Uva',              preco: 5.50,  img: 'fotos/img/17.png', cat: 'mini'       },
+      { id: 18, nome: 'Mini Brownie',                    preco: 5.00,  img: 'fotos/img/18.png', cat: 'mini'       },
+      { id: 19, nome: 'Mini Brownie Recheado',           preco: 6.00,  img: 'fotos/img/19.png', cat: 'mini'       },
+      { id: 20, nome: 'Mini Tortinha de Limão',          preco: 7.00,  img: 'fotos/img/20.png', cat: 'mini'       },
+      { id: 21, nome: 'Mini Trufas',                     preco: 5.50,  img: 'fotos/img/21.png', cat: 'mini'       },
+      { id: 22, nome: 'Mini Maçã do Amor',               preco: 6.00,  img: 'fotos/img/22.png', cat: 'mini'       },
+      { id: 23, nome: 'Mini Churros Recheado',           preco: 5.50,  img: 'fotos/img/23.png', cat: 'mini'       },
+      { id: 24, nome: 'Mini Cone Recheado',              preco: 5.00,  img: 'fotos/img/24.png', cat: 'mini'       },
+    ];
+
+    // ── RENDERIZAR CARDS ──────────────────────────────────────────
+    function renderizarCards(filtro = 'todos') {
+      const grid = document.getElementById('grid-produtos');
+      const lista = filtro === 'todos' ? produtos : produtos.filter(p => p.cat === filtro);
+
+      grid.innerHTML = lista.map(p => `
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card-produto">
+            <div class="card-img-wrap">
+              <img src="${p.img}" alt="${p.nome}" loading="lazy"
+                onerror="this.src='https://placehold.co/300x300/f7e0db/6b4032?text=${encodeURIComponent(p.nome)}'">
+            </div>
+            <div class="card-body">
+              <div class="card-title">${p.nome}</div>
+              <div class="card-preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
+              <div class="controle-qtd">
+                <button class="btn-qtd" onclick="decrementar(${p.id})">−</button>
+                <span class="qtd-display" id="qtd-${p.id}">1</span>
+                <button class="btn-qtd" onclick="incrementar(${p.id})">+</button>
+              </div>
+              <button class="btn-add" id="btn-${p.id}" onclick="adicionarAoCarrinho(${p.id})">
+                🛒 Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ── CONTROLE DE QUANTIDADE LOCAL (antes de adicionar) ────────
+    const qtdsLocais = {};
+
+    function incrementar(id) {
+      qtdsLocais[id] = (qtdsLocais[id] || 1) + 1;
+      document.getElementById('qtd-' + id).textContent = qtdsLocais[id];
+    }
+
+    function decrementar(id) {
+      qtdsLocais[id] = Math.max(1, (qtdsLocais[id] || 1) - 1);
+      document.getElementById('qtd-' + id).textContent = qtdsLocais[id];
+    }
+
+    function adicionarAoCarrinho(id) {
+      const p = produtos.find(x => x.id === id);
+      const qtd = qtdsLocais[id] || 1;
+      adicionarItem({ ...p, qtd });
+
+      // Feedback visual no botão
+      const btn = document.getElementById('btn-' + id);
+      const original = btn.textContent;
+      btn.textContent = '✔ Adicionado!';
+      btn.classList.add('adicionado');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('adicionado');
+        qtdsLocais[id] = 1;
+        document.getElementById('qtd-' + id).textContent = 1;
+      }, 1800);
+    }
+
+    // ── FILTROS ───────────────────────────────────────────────────
+    document.getElementById('filtros').addEventListener('click', e => {
+      const btn = e.target.closest('[data-cat]');
+      if (!btn) return;
+      document.querySelectorAll('#filtros [data-cat]').forEach(b => {
+        b.classList.remove('btn-thay-primary', 'ativo-filtro');
+        b.classList.add('btn-thay-outline');
+      });
+      btn.classList.add('btn-thay-primary', 'ativo-filtro');
+      btn.classList.remove('btn-thay-outline');
+      renderizarCards(btn.dataset.cat);
+    });
+
+    renderizarCards();
+  </script>
+</body>
+</html>
