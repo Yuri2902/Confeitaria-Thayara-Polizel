@@ -3,40 +3,23 @@
    Stylesheet compartilhado
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
 
-:root {
-  --rosa-escuro:   #c96a5a;
-  --rosa-medio:    #d67c6d;
-  --rosa-claro:    #e5a095;
-  --rosa-pastel:   #f7e0db;
-  --rosa-fundo:    #fff8f6;
-  --marrom:        #6b4032;
-  --marrom-claro:  #8b5e4e;
-  --branco:        #ffffff;
-  --texto:         #3d2318;
-  --texto-suave:   #7a5a52;
-  --sombra:        rgba(107,64,50,0.12);
-  --radius:        12px;
-  --radius-sm:     8px;
-  --transition:    0.25s ease;
-}
 
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
-  background-color: var(--rosa-fundo);
-  color: var(--texto);
+  background-color: #fff8f6;
+  color: #3d2318;
   font-size: 15px;
   line-height: 1.6;
 }
 
 /* ── BARRA DE TOPO ───────────────────────── */
 .topo-localizacao {
-  background-color: var(--marrom);
-  color: var(--rosa-pastel);
+  background-color: #6b4032;
+  color: #f7e0db;
   text-align: center;
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -45,12 +28,12 @@ body {
 
 /* ── NAVBAR ──────────────────────────────── */
 .navbar-thay {
-  background-color: var(--rosa-medio);
+  background-color: #d67c6d;
   padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px var(--sombra);
+  box-shadow: 0 2px 8px  rgba(107,64,50,0.12);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -61,7 +44,7 @@ body {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--branco);
+  color:#ffffff;
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
   font-weight: 600;
@@ -85,21 +68,21 @@ body {
 
 .navbar-thay .nav-links li a {
   display: block;
-  color: var(--marrom);
+  color: #6b4032;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 10px 16px;
-  border-radius: var(--radius-sm);
-  transition: background var(--transition), color var(--transition);
+  border-radius:  8px;
+  transition: background  0.25s ease, color  0.25s ease;
 }
 
 .navbar-thay .nav-links li a:hover,
 .navbar-thay .nav-links li a.active {
-  background-color: var(--marrom);
-  color: var(--rosa-pastel);
+  background-color: #6b4032;
+  color: #f7e0db;
 }
 
 .navbar-thay .nav-links li a.carrinho-link {
@@ -111,8 +94,8 @@ body {
   position: absolute;
   top: 4px;
   right: 4px;
-  background: var(--marrom);
-  color: var(--rosa-pastel);
+  background: #6b4032;
+  color: #f7e0db;
   font-size: 9px;
   font-weight: 700;
   border-radius: 50%;
@@ -128,9 +111,9 @@ body {
 .navbar-toggler-thay {
   display: none;
   background: none;
-  border: 2px solid var(--marrom);
-  color: var(--marrom);
-  border-radius: var(--radius-sm);
+  border: 2px solid #6b4032;
+  color: #6b4032;
+  border-radius:  8px;
   padding: 6px 10px;
   font-size: 18px;
   cursor: pointer;
@@ -145,10 +128,10 @@ body {
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--rosa-medio);
+    background: #d67c6d;
     padding: 12px;
     gap: 4px;
-    box-shadow: 0 4px 12px var(--sombra);
+    box-shadow: 0 4px 12px  rgba(107,64,50,0.12);
   }
   .navbar-thay .nav-links.aberto { display: flex; }
   .navbar-thay .nav-links li { width: 100%; }
@@ -157,12 +140,12 @@ body {
 }
 
 /* ── TIPOGRAFIA ──────────────────────────── */
-h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--marrom); }
+h1, h2, h3 { font-family: 'Playfair Display', serif; color: #6b4032; }
 h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 
 .subtitulo {
-  color: var(--texto-suave);
+  color: #7a5a52;
   font-size: 14px;
   letter-spacing: 0.04em;
   margin-top: -8px;
@@ -179,31 +162,31 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all var(--transition);
+  transition: all   0.25s ease;
   cursor: pointer;
   border: 2px solid transparent;
 }
 
 .btn-thay-primary {
-  background-color: var(--rosa-escuro);
-  color: var(--branco);
-  border-color: var(--rosa-escuro);
+  background-color: #c96a5a;
+  color: #ffffff;
+  border-color: #c96a5a;
 }
 .btn-thay-primary:hover {
-  background-color: var(--marrom);
-  border-color: var(--marrom);
-  color: var(--branco);
+  background-color:#6b4032;
+  border-color: #6b4032;
+  color: #ffffff;
 }
 
 .btn-thay-outline {
   background-color: transparent;
-  color: var(--marrom);
-  border-color: var(--rosa-claro);
+  color: #6b4032;
+  border-color:#e5a095;
 }
 .btn-thay-outline:hover {
-  background-color: var(--rosa-pastel);
-  border-color: var(--marrom);
-  color: var(--marrom);
+  background-color:#f7e0db;
+  border-color: #6b4032;
+  color:#6b4032;
 }
 
 /* ── CARDS DO CARDÁPIO ───────────────────── */
@@ -211,9 +194,9 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   border: none;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 3px 14px var(--sombra);
-  transition: transform var(--transition), box-shadow var(--transition);
-  background: var(--branco);
+  box-shadow: 0 3px 14px  rgba(107,64,50,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -228,7 +211,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   position: relative;
   overflow: hidden;
   aspect-ratio: 1 / 1;
-  background: var(--rosa-pastel);
+  background:#f7e0db;
 }
 
 .card-produto .card-img-wrap img {
@@ -255,12 +238,12 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   font-size: 13px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--marrom);
+  color:#6b4032;
   margin-bottom: 4px;
 }
 
 .card-produto .card-preco {
-  color: var(--rosa-escuro);
+  color: #c96a5a;
   font-weight: 700;
   font-size: 15px;
   margin-bottom: auto;
@@ -277,22 +260,22 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1.5px solid var(--rosa-claro);
-  background: var(--rosa-fundo);
-  color: var(--marrom);
+  border: 1.5px solid#e5a095;
+  background: #fff8f6;
+  color: #6b4032;
   font-size: 16px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all  0.25s ease;
   line-height: 1;
 }
 
 .card-produto .btn-qtd:hover {
-  background: var(--rosa-escuro);
-  border-color: var(--rosa-escuro);
+  background: #c96a5a;
+  border-color:#c96a5a;
   color: white;
 }
 
@@ -301,7 +284,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   font-size: 15px;
   min-width: 20px;
   text-align: center;
-  color: var(--marrom);
+  color: #6b4032;
 }
 
 .card-produto .btn-add {
@@ -309,8 +292,8 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   width: 100%;
   text-align: center;
   padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--rosa-escuro);
+  border-radius:  8px;
+  background: #c96a5a;
   color: white;
   border: none;
   font-size: 12px;
@@ -318,11 +301,11 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background  0.25s ease;
 }
 
 .card-produto .btn-add:hover {
-  background: var(--marrom);
+  background:#6b4032;
 }
 
 .card-produto .btn-add.adicionado {
@@ -330,16 +313,16 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 }
 
 /* ── BANNER HERO ─────────────────────────── */
-.banner-hero {
-  background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--rosa-medio) 60%, var(--rosa-escuro) 100%);
+.banner-thay {
+  background: linear-gradient(135deg, #e5a095 0%, #d67c6d 60%, #c96a5a 100%);
   padding: 80px 24px;
   text-align: center;
-  color: var(--branco);
+  color: #ffffff;
   position: relative;
   overflow: hidden;
 }
 
-.banner-hero::before {
+.banner-thay:before {
   content: '';
   position: absolute;
   inset: 0;
@@ -347,20 +330,20 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   pointer-events: none;
 }
 
-.banner-hero h1 {
-  color: var(--branco);
+.banner-thayh1 {
+  color: #ffffff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.15);
   margin-bottom: 12px;
 }
 
-.banner-hero p {
+.banner-thay p {
   color: rgba(255,255,255,0.9);
   font-size: 16px;
   max-width: 540px;
   margin: 0 auto 28px;
 }
 
-.banner-hero .botoes {
+.banner-thay .botoes {
   display: flex;
   gap: 14px;
   justify-content: center;
@@ -379,15 +362,15 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 
 /* ── CARDS DE CATEGORIA (HOME) ───────────── */
 .card-categoria {
-  border-radius: var(--radius);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 3px 14px var(--sombra);
+  box-shadow: 0 3px 14px  rgba(107,64,50,0.12);
   position: relative;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--branco);
+  background: #ffffff;
 }
 
 .card-categoria:hover {
@@ -414,34 +397,34 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--marrom);
+  color: #6b4032;
   text-align: center;
-  background: var(--branco);
+  background: #ffffff;
 }
 
 /* ── FEEDBACKS ───────────────────────────── */
 .feedback-img {
-  border-radius: var(--radius);
-  box-shadow: 0 4px 16px var(--sombra);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(107,64,50,0.12);
   max-width: 100%;
   height: auto;
 }
 
 /* ── RODAPÉ (sem usar <footer>) ──────────── */
 .rodape {
-  background-color: var(--marrom);
-  color: var(--rosa-pastel);
+  background-color: #6b4032;
+  color: #f7e0db;
   text-align: center;
   padding: 36px 24px;
   margin-top: 60px;
 }
 
 .rodape a {
-  color: var(--rosa-claro);
+  color:#e5a095;
   text-decoration: none;
   font-size: 13px;
 }
-.rodape a:hover { color: var(--branco); }
+.rodape a:hover { color: #ffffff; }
 
 .rodape .social-icons {
   display: flex;
@@ -454,16 +437,15 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   width: 32px;
   height: 32px;
   filter: brightness(1.8) saturate(0);
-  transition: filter var(--transition);
+  transition: filter 0.25s ease;
 }
 .rodape .social-icons img:hover { filter: none; }
 
 /* ── CARRINHO ────────────────────────────── */
 .painel-carrinho {
-  background: var(--branco);
-  border-radius: var(--radius);
+  background: #ffffff;
   padding: 28px;
-  box-shadow: 0 3px 20px var(--sombra);
+  box-shadow: 0 3px 20px rgba(107,64,50,0.12);
 }
 
 .item-carrinho {
@@ -471,25 +453,25 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   align-items: center;
   gap: 14px;
   padding: 14px 0;
-  border-bottom: 1px solid var(--rosa-pastel);
+  border-bottom: 1px solid #f7e0db;
 }
 
 .item-carrinho img {
   width: 70px;
   height: 70px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
-  background: var(--rosa-pastel);
+  border-radius: 8px;
+  background: #f7e0db;
 }
 
 .item-carrinho .info { flex: 1; }
 .item-carrinho .info .nome {
   font-weight: 700;
   font-size: 14px;
-  color: var(--marrom);
+  color: #6b4032;
 }
 .item-carrinho .info .preco {
-  color: var(--rosa-escuro);
+  color: #c96a5a;
   font-size: 14px;
   font-weight: 700;
 }
@@ -499,17 +481,17 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .item-carrinho .btn-remover {
   background: none;
   border: none;
-  color: var(--texto-suave);
+  color: #7a5a52;
   cursor: pointer;
   font-size: 18px;
   padding: 4px;
-  transition: color var(--transition);
+  transition: color 0.25s ease;
 }
 .item-carrinho .btn-remover:hover { color: #c0392b; }
 
 .resumo-carrinho {
-  background: var(--rosa-pastel);
-  border-radius: var(--radius);
+  background: #f7e0db;
+  border-radius: 12px;
   padding: 22px;
 }
 
@@ -518,30 +500,30 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   justify-content: space-between;
   margin-bottom: 10px;
   font-size: 14px;
-  color: var(--texto-suave);
+  color:#7a5a52;
 }
 
 .resumo-carrinho .total {
   font-size: 18px;
   font-weight: 700;
-  color: var(--marrom);
-  border-top: 1px solid var(--rosa-claro);
+  color: #6b4032;
+  border-top: 1px solid #e5a095;
   padding-top: 10px;
   margin-top: 6px;
 }
 
 /* ── GUIA ────────────────────────────────── */
 .guia-card {
-  background: var(--branco);
-  border-radius: var(--radius);
+  background: #ffffff;
+  border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 3px 14px var(--sombra);
+  box-shadow: 0 3px 14px rgba(107,64,50,0.12);
   margin-bottom: 20px;
 }
 
 .guia-card .tamanho-badge {
   display: inline-block;
-  background: var(--rosa-escuro);
+  background: #c96a5a;
   color: white;
   border-radius: 30px;
   padding: 4px 14px;
@@ -554,23 +536,23 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .guia-card .rendimento {
   font-size: 28px;
   font-weight: 700;
-  color: var(--rosa-escuro);
+  color: #c96a5a;
   font-family: 'Playfair Display', serif;
 }
 
 .tag-recheio {
   display: inline-block;
-  background: var(--rosa-fundo);
-  border: 1px solid var(--rosa-claro);
-  color: var(--marrom);
+  background: #fff8f6;
+  border: 1px solid #e5a095;
+  color: #6b4032;
   font-size: 12px;
   border-radius: 20px;
   padding: 4px 12px;
   margin: 3px;
-  transition: background var(--transition);
+  transition: background  0.25s ease;
 }
 .tag-recheio:hover {
-  background: var(--rosa-pastel);
+  background: #f7e0db;
 }
 .tag-recheio.premium {
   background: #fff8e1;
@@ -583,10 +565,10 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: var(--marrom);
-  color: var(--branco);
+  background:#6b4032;
+  color: #ffffff;
   padding: 12px 20px;
-  border-radius: var(--radius-sm);
+  border-radius:  8px;
   font-size: 13px;
   font-weight: 600;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -604,7 +586,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: var(--texto-suave);
+  color: #7a5a52;
 }
 .empty-state .icone {
   font-size: 64px;
