@@ -1,46 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thayara Polizel – Confeitaria Artesanal</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-  <!-- TOPO -->
-  <div class="topo-localizacao">📍 Retirada: Rua Zike Tuma 576– São Paulo, SP</div>
-
-  <!-- NAVBAR Bootstrap Navbar (sem <header>) -->
-  <nav class="navbar-thay">
-    <a href="index.html" class="brand">
-      <img src="fotos/LogoBarra.png" alt="Logo Thayara" onerror="this.style.display='none'">
-      Thayara Polizel
-    </a>
-    <button class="navbar-toggler-thay" onclick="toggleMenu()" aria-label="Menu">☰</button>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="html/cardapio.html">Cardápio</a></li>
-      <li><a href="html/carrinho.html">Guia de Encomendas</a></li>
-      <li>
-        <a href="html/carrinho.html" class="carrinho-link" title="Carrinho">
-          🛒
-          <span class="badge-carrinho" style="display:none;">0</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+<?php 
+  require_once __DIR__ . '/config.php';
+  require_once BASE_PATH . '/includes/cabecalho.php';
+?>
 
   <!-- HERO BANNER -->
   <div class="banner-thay">
     <h1>Doces feitos com alma</h1>
     <p>Confeitaria artesanal com criações personalizadas para tornar seus momentos ainda mais especiais. Cada peça feita com amor, dedicação e ingredientes selecionados.</p>
     <div class="botoes">
-      <a href="html/cardapio.html" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
-      <a href="html/guia.html" class="btn-thay btn-thay-outline" style="color:#fff;border-color:rgba(255,255,255,0.7);">Monte Seu Bolo</a>
+      <a href="<?= BASE_URL ?>/cardapio.php" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
+      <a href="<?= BASE_URL ?>/guia.php" class="btn-thay btn-thay-outline" style="color:#fff;border-color:rgba(255,255,255,0.7);">Monte Seu Bolo</a>
     </div>
   </div>
 
@@ -57,7 +26,7 @@
         <p>Olá! Sou a <strong>Thayara Polizel</strong>, e trabalho de forma artesanal e solo em cada criação que sai da minha confeitaria. Aqui não há produção em massa — cada doce, cada bolo, cada detalhe recebe minha atenção pessoal e dedicada.</p>
         <p>Por ser uma <strong>produção individual</strong>, garanto cuidado total em cada etapa: desde a escolha dos ingredientes mais frescos até a montagem personalizada.</p>
         <p>Meu compromisso é fazer com que cada momento especial da sua vida seja ainda mais doce. ✨</p>
-        <a href="html/guia.html" class="btn-thay btn-thay-outline">Monte seu pedido →</a>
+        <a href="<?= BASE_URL ?>/guia.php" class="btn-thay btn-thay-outline">Monte seu pedido →</a>
       </div>
     </div>
   </div>
@@ -71,19 +40,19 @@
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-6 col-md-4">
-          <a href="html/cardapio.html" class="card-categoria">
+          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
             <img src="fotos/MiniBolo1.png" alt="Mini Bolos" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Mini+Bolos'">
             <div class="cat-label">Mini Bolos</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
-          <a href="html/cardapio.html" class="card-categoria">
+          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
             <img src="fotos/BoloDecorado1.png" alt="Bolos Decorados" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Bolos+Decorados'">
             <div class="cat-label">Bolos Decorados</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
-          <a href="html/cardapio.html" class="card-categoria">
+          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
             <img src="fotos/Kit1.png" alt="Kit Festa" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Kit+Festa'">
             <div class="cat-label">Kit Festa</div>
           </a>
@@ -118,25 +87,5 @@
     </div>
   </div>
 
-  <!-- REDES SOCIAIS / RODAPÉ (sem <footer>) -->
-  <div class="rodape">
-    <div class="social-icons">
-      <a href="https://instagram.com" target="_blank" title="Instagram">
-        <img src="fotos/IconInstagram.png" alt="Instagram" onerror="this.parentElement.textContent='📸'">
-      </a>
-      <a href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">
-        <img src="fotos/IconWhatsapp.png" alt="WhatsApp" onerror="this.parentElement.textContent='💬'">
-      </a>
-    </div>
-    <p style="margin:0; font-size:13px; color:var(--rosa-pastel);">
-      &copy; 2026 Thayara Polizel – Confeitaria Artesanal · Zona Sul, São Paulo
-    </p>
-    <p style="margin-top:6px; font-size:11px; color:var(--rosa-claro); opacity:0.7;">
-      Pedidos com antecedência mínima de 72h
-    </p>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/carrinho.js"></script>
-</body>
-</html>
+<!-- RODAPÉ -->
+<?php require_once BASE_PATH. '/includes/rodape.php'?>

@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho – Thayara Polizel</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-
-  <div class="topo-localizacao">📍 Retirada: Zona Sul – São Paulo, SP</div>
-
-  <nav class="navbar-thay">
-    <a href="../index.html" class="brand">
-      <img src="../fotos/LogoBarra.png" alt="Logo" onerror="this.style.display='none'">
-      Thayara Polizel
-    </a>
-    <button class="navbar-toggler-thay" onclick="toggleMenu()" aria-label="Menu">☰</button>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="cardapio.html">Cardápio</a></li>
-      <li><a href="guia.html">Guia de Encomendas</a></li>
-      <li>
-        <a href="carrinho.html" class="carrinho-link active" title="Carrinho">
-          🛒
-          <span class="badge-carrinho" style="display:none;">0</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+<?php
+require_once __DIR__ . '/config.php';
+require_once BASE_PATH . '/includes/cabecalho.php';
+?>
 
   <div style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo));padding:40px 0 20px;text-align:center;">
     <h1>Seu Carrinho</h1>
@@ -41,7 +13,7 @@
 
       <!-- LISTA DE ITENS -->
       <div class="col-lg-8">
-        <a href="cardapio.html" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
+        <a href="<?= BASE_URL ?>/cardapio.php" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
         <div class="painel-carrinho mt-3" id="lista-carrinho">
           <!-- preenchido pelo JS -->
         </div>
@@ -93,13 +65,9 @@
     </div>
   </div>
 
-  <!-- Rodapé -->
-  <div class="rodape">
-    <p style="margin:0;font-size:13px;color:#f7e0db;">&copy; 2026 Thayara Polizel – Confeitaria Artesanal</p>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/carrinho.js"></script>
+<!-- RODAPÉ -->
+<?php require_once BASE_PATH. '/includes/rodape.php'?>
+  
   <script>
     function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
 
@@ -114,7 +82,7 @@
             <div class="icone">🛒</div>
             <h2 style="font-size:1.2rem;">Seu carrinho está vazio</h2>
             <p>Adicione produtos do cardápio para fazer seu pedido.</p>
-            <a href="cardapio.html" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
+            <a href="<?= BASE_URL ?>/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
           </div>`;
         resumo.style.display = 'none';
         return;
@@ -196,5 +164,3 @@
 
     renderizarCarrinho();
   </script>
-</body>
-</html>
