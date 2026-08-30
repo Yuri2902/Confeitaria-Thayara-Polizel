@@ -18,6 +18,15 @@ require_once __DIR__ . '/../config.php';
   <!-- TOPO -->
   <div class="topo-localizacao">📍 Retirada: Rua Zike Tuma 576– São Paulo, SP</div>
 
+  <!-- Menu Usuarios -->
+  <div class="py-2" style="background-color: #3d2314;">
+        <div class="container">
+          <a href="<?= BASE_URL ?>/login.php" class="btn btn-sm btn-outline-light">
+                <i class="bi bi-people"></i> Usuário
+            </a>
+        </div>
+    </div>
+
   <!-- NAVBAR Bootstrap Navbar -->
   <nav class="navbar-thay">
     <a href="<?= BASE_URL ?>/index.php" class="brand">
