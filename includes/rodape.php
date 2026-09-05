@@ -20,6 +20,6 @@ require_once __DIR__ . '/../config.php';
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/carrinho.js"></script>
+  <script src="<?= BASE_URL ?>/js/carrinho.js"></script>
 </body>
 </html>

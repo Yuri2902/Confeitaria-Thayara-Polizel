@@ -8,7 +8,7 @@
     <h1>Doces feitos com alma</h1>
     <p>Confeitaria artesanal com criações personalizadas para tornar seus momentos ainda mais especiais. Cada peça feita com amor, dedicação e ingredientes selecionados.</p>
     <div class="botoes">
-      <a href="<?= BASE_URL ?>/cardapio.php" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
+      <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
       <a href="<?= BASE_URL ?>/guia.php" class="btn-thay btn-thay-outline" style="color:#fff;border-color:rgba(255,255,255,0.7);">Monte Seu Bolo</a>
     </div>
   </div>
@@ -40,19 +40,19 @@
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-6 col-md-4">
-          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
+          <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="card-categoria">
             <img src="fotos/MiniBolo1.png" alt="Mini Bolos" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Mini+Bolos'">
             <div class="cat-label">Mini Bolos</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
-          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
+          <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="card-categoria">
             <img src="fotos/BoloDecorado1.png" alt="Bolos Decorados" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Bolos+Decorados'">
             <div class="cat-label">Bolos Decorados</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
-          <a href="<?= BASE_URL ?>/cardapio.php" class="card-categoria">
+          <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="card-categoria">
             <img src="fotos/Kit1.png" alt="Kit Festa" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Kit+Festa'">
             <div class="cat-label">Kit Festa</div>
           </a>

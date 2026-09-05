@@ -36,7 +36,7 @@ require_once __DIR__ . '/../config.php';
     <button class="navbar-toggler-thay" onclick="toggleMenu()" aria-label="Menu">☰</button>
     <ul class="nav-links">
       <li><a href="<?= BASE_URL ?>/index.php" class="active">Home</a></li>
-      <li><a href="<?= BASE_URL ?>/cardapio.php">Cardápio</a></li>
+      <li><a href="<?= BASE_URL ?>/cardapio/cardapio.php">Cardápio</a></li>
       <li><a href="<?= BASE_URL ?>/guia.php">Guia de Encomendas</a></li>
       <li>
         <a href="<?= BASE_URL ?>/carrinho.php" class="carrinho-link" title="Carrinho">

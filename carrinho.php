@@ -13,7 +13,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
 
       <!-- LISTA DE ITENS -->
       <div class="col-lg-8">
-        <a href="<?= BASE_URL ?>/cardapio.php" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
+        <a href="<?= BASE_URL ?>/cardapio/cardapio.php" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
         <div class="painel-carrinho mt-3" id="lista-carrinho">
           <!-- preenchido pelo JS -->
         </div>
@@ -69,7 +69,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
 <?php require_once BASE_PATH. '/includes/rodape.php'?>
   
   <script>
-    function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+    function fmt(v) { return 'R$ ' + Number(v).toFixed(2).replace('.', ','); }
 
     function renderizarCarrinho() {
       const itens = carregarCarrinho();
@@ -82,7 +82,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <div class="icone">🛒</div>
             <h2 style="font-size:1.2rem;">Seu carrinho está vazio</h2>
             <p>Adicione produtos do cardápio para fazer seu pedido.</p>
-            <a href="<?= BASE_URL ?>/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
+            <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
           </div>`;
         resumo.style.display = 'none';
         return;

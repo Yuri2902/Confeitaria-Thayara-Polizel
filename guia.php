@@ -132,7 +132,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
     <!-- CTA -->
     <div class="text-center">
       <p style="color:#7a5a52;font-size:14px;margin-bottom:16px;">Pronto para montar seu pedido?</p>
-      <a href="<?= BASE_URL ?>/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;margin-right:10px;">Ver Cardápio</a>
+      <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;margin-right:10px;">Ver Cardápio</a>
       <a href="<?= BASE_URL ?>/carrinho.php" class="btn-thay btn-thay-outline" style="text-decoration:none;">Ver Carrinho 🛒</a>
     </div>
 

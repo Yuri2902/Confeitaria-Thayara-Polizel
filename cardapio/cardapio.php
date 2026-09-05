@@ -1,6 +1,17 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
+require_once BASE_PATH . '/src/cardapio_crud.php';
+
+$erro = null;
+$produtosBanco = [];
+
+//tentativa de conexão com o banco
+try {
+  $produtosBanco = buscarCardapio($conexao);
+} catch (Throwable $e) {
+  $erro = "Falha ao buscar Cardapio. Detalhes: <br>" .$e->getMessage();
+}
 ?>
 
   <!-- Cabeçalho da página -->
@@ -8,6 +19,10 @@ require_once BASE_PATH . '/includes/cabecalho.php';
     <h1>Nosso Cardápio</h1>
     <p class="subtitulo">Explore nossa vitrine de produtos artesanais de alta qualidade</p>
   </div>
+
+  <?php if($erro){ ?>
+    <p class="alert alert-danger text-center"><?= $erro ?></p>
+  <?php } ?>
 
   <!-- Filtro de categorias -->
   <div class="container my-4 text-center">
@@ -30,32 +45,8 @@ require_once BASE_PATH . '/includes/cabecalho.php';
   
   <script>
     // ── CATÁLOGO DE PRODUTOS ──────────────────────────────────────
-    const produtos = [
-      { id: 1,  nome: 'Brigadeiros Clássicos',          preco: 4.50,  img: 'fotos/img/1.png',  cat: 'brigadeiro' },
-      { id: 2,  nome: 'Brigadeiros Especiais',           preco: 5.50,  img: 'fotos/img/2.png',  cat: 'brigadeiro' },
-      { id: 3,  nome: 'Surpresa de Uva',                 preco: 5.00,  img: 'fotos/img/3.png',  cat: 'brigadeiro' },
-      { id: 4,  nome: 'Brigadeiros Premium',             preco: 7.00,  img: 'fotos/img/4.png',  cat: 'brigadeiro' },
-      { id: 5,  nome: 'Brigadeiro Floral',               preco: 6.50,  img: 'fotos/img/5.png',  cat: 'brigadeiro' },
-      { id: 6,  nome: 'Camafeu com Chocolate',           preco: 6.00,  img: 'fotos/img/6.png',  cat: 'brigadeiro' },
-      { id: 7,  nome: 'Bombom de Cereja',                preco: 6.00,  img: 'fotos/img/7.png',  cat: 'caixa'      },
-      { id: 8,  nome: 'Caixa de Pistache',               preco: 12.00, img: 'fotos/img/8.png',  cat: 'caixa'      },
-      { id: 9,  nome: 'Caixa de Uva',                    preco: 11.00, img: 'fotos/img/9.png',  cat: 'caixa'      },
-      { id: 10, nome: 'Coração Aberto',                  preco: 18.00, img: 'fotos/img/10.png', cat: 'caixa'      },
-      { id: 11, nome: 'Coração Fechado',                 preco: 20.00, img: 'fotos/img/11.png', cat: 'caixa'      },
-      { id: 12, nome: 'Pirâmide de Frutas Vermelhas',    preco: 22.00, img: 'fotos/img/12.png', cat: 'caixa'      },
-      { id: 13, nome: 'Pirulito de Chocolate',           preco: 5.00,  img: 'fotos/img/13.png', cat: 'mini'       },
-      { id: 14, nome: 'Bem Casado de Colher',            preco: 6.50,  img: 'fotos/img/14.png', cat: 'mini'       },
-      { id: 15, nome: 'Cake Pop Quadrado',               preco: 6.00,  img: 'fotos/img/15.png', cat: 'mini'       },
-      { id: 16, nome: 'Mini Bolo de Cenoura',            preco: 14.00, img: 'fotos/img/16.png', cat: 'mini'       },
-      { id: 17, nome: 'Mini Bombom de Uva',              preco: 5.50,  img: 'fotos/img/17.png', cat: 'mini'       },
-      { id: 18, nome: 'Mini Brownie',                    preco: 5.00,  img: 'fotos/img/18.png', cat: 'mini'       },
-      { id: 19, nome: 'Mini Brownie Recheado',           preco: 6.00,  img: 'fotos/img/19.png', cat: 'mini'       },
-      { id: 20, nome: 'Mini Tortinha de Limão',          preco: 7.00,  img: 'fotos/img/20.png', cat: 'mini'       },
-      { id: 21, nome: 'Mini Trufas',                     preco: 5.50,  img: 'fotos/img/21.png', cat: 'mini'       },
-      { id: 22, nome: 'Mini Maçã do Amor',               preco: 6.00,  img: 'fotos/img/22.png', cat: 'mini'       },
-      { id: 23, nome: 'Mini Churros Recheado',           preco: 5.50,  img: 'fotos/img/23.png', cat: 'mini'       },
-      { id: 24, nome: 'Mini Cone Recheado',              preco: 5.00,  img: 'fotos/img/24.png', cat: 'mini'       },
-    ];
+    const produtos = <?= json_encode($produtosBanco) ?>;
+    console.log("Produtos vindos do banco:", produtos);
 
     // ── RENDERIZAR CARDS ──────────────────────────────────────────
     function renderizarCards(filtro = 'todos') {
@@ -66,12 +57,12 @@ require_once BASE_PATH . '/includes/cabecalho.php';
         <div class="col-6 col-md-4 col-lg-3">
           <div class="card-produto">
             <div class="card-img-wrap">
-              <img src="${p.img}" alt="${p.nome}" loading="lazy"
+              <img src="<?= BASE_URL ?>/${p.img}" alt="${p.nome}" loading="lazy"
                 onerror="this.src='https://placehold.co/300x300/f7e0db/6b4032?text=${encodeURIComponent(p.nome)}'">
             </div>
             <div class="card-body">
               <div class="card-title">${p.nome}</div>
-              <div class="card-preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
+              <div class="card-preco">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</div>
               <div class="controle-qtd">
                 <button class="btn-qtd" onclick="decrementar(${p.id})">−</button>
                 <span class="qtd-display" id="qtd-${p.id}">1</span>
