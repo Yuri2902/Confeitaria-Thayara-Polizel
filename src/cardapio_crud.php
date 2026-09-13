@@ -22,3 +22,14 @@ function inserirProduto(PDO $conexao, string $nome, float $preco, string $cat, s
 
     $consulta->execute();
 }
+
+function buscarProdutoPorId(PDO $conexao, int $id): ?array
+{
+    $sql = "SELECT * FROM produtos WHERE id = :id";
+    $consulta = $conexao->prepare($sql);
+    $consulta -> bindValue(":id", $id);
+    $consulta->execute();
+
+    $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    return $resultado ?: null;
+}

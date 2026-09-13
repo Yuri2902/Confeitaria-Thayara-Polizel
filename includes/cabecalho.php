@@ -24,6 +24,9 @@ require_once __DIR__ . '/../config.php';
         <div class="container">
           <a href="<?= BASE_URL ?>/login.php" class="btn btn-sm btn-outline-light">
                 <i class="bi bi-people"></i> Usuário
+          </a>
+          <a href="<?= BASE_URL ?>/administradora/cardapio-adm.php" class="btn btn-sm btn-outline-light">
+                <i class="bi bi-building-lock"></i> Administradora
             </a>
         </div>
     </div>

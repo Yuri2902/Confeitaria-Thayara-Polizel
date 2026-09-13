@@ -5,10 +5,10 @@ require_once __DIR__ . '/../config.php';
   <div class="rodape">
     <div class="social-icons">
       <a href="https://instagram.com" target="_blank" title="Instagram">
-        <img src="fotos/IconInstagram.png" alt="Instagram" onerror="this.parentElement.textContent='📸'">
+        <img src="<?= BASE_URL ?>/fotos/IconInstagram.png" alt="Instagram" onerror="this.parentElement.textContent='📸'">
       </a>
       <a href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">
-        <img src="fotos/IconWhatsapp.png" alt="WhatsApp" onerror="this.parentElement.textContent='💬'">
+        <img src="<?= BASE_URL ?>/fotos/IconWhatsapp.png" alt="WhatsApp" onerror="this.parentElement.textContent='💬'">
       </a>
     </div>
     <p style="margin:0; font-size:13px; color:var(--rosa-pastel);">
