@@ -22,7 +22,7 @@ try {
 ?>
 
 <section class="mb-4 border rounded-3 p-4" style="border-color: #3d2314 !important;">
-    <h3 class="text-center"><i class="bi bi-plus-circle-fill"></i> Adicionar Produto</h3>
+    <h3 class="text-center"><i class="bi bi-pencil-square"></i> Editar Produto</h3>
 
     <?php if($erro){ ?>
         <p class="alert alert-danger text-center"><?= $erro ?></p>
