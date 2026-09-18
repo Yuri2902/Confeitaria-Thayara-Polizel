@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Editar Produto – Painel Administrativo';
 require_once __DIR__ . "/../config.php";
 require_once BASE_PATH . "/src/cardapio_crud.php";
 require_once BASE_PATH . "/includes/cabecalho.php";
@@ -45,9 +46,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $enderecoImagem= BASE_PATH . '/fotos/img/' . $nomeImagem;
                 move_uploaded_file($img['tmp_name'], $enderecoImagem);
                 $caminhoBanco = 'fotos/img/' . $nomeImagem;
-    
+
                 }
-                
+
             atualizarProduto($conexao, $id, $nome, $preco, $cat, $caminhoBanco);
             header("location:cardapio-adm.php");
             exit;
@@ -58,19 +59,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $erro = "Erro ao atualizar produto: <br>". $e->getMessage();
             }
         }
-        
+
     }
 }
 
 ?>
 
-<section class="mb-4 border rounded-3 p-4" style="border-color: #3d2314 !important;">
+<section class="mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
     <h3 class="text-center"><i class="bi bi-pencil-square"></i> Editar Produto</h3>
 
     <?php if($erro){ ?>
         <p class="alert alert-danger text-center"><?= $erro ?></p>
     <?php } ?>
-    
+
     <form action="" method="post" enctype="multipart/form-data" class="w-75 mx-auto">
         <div class="form-group">
             <label for="nome" class="form-label">Nome: </label>
@@ -85,7 +86,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div class="form-group mb-3">
             <label for="cat" class="form-label">Categoria:</label>
             <select name="cat" id="cat" class="form-select">
-                <?php 
+                <?php
                     $categorias = [
                         'brigadeiro' => 'Brigadeiro',
                         'caixa' => 'Caixa',
@@ -109,7 +110,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <small class="form-text text-muted">Selecione um arquivo apenas se desejar alterar a imagem atual.</small>
             </div>
         </div>
-        
+
         <button class="btn btn-success my-4" type="submit">
             <i class="bi bi-check-circle"></i> Salvar
         </button>

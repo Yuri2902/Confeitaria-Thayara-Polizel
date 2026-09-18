@@ -1,10 +1,11 @@
 <?php
+$pageTitle = 'Login – Thayara Polizel';
 require_once __DIR__ . "/config.php";
 require_once BASE_PATH . "/includes/cabecalho.php";
 ?>
 
 <section class="text-center mb-4 border rounded-3 p-4"
-style="border-color: #3d2314 !important;">
+style="border-color: var(--marrom-escuro) !important;">
 
     <h1 class="mb-2">Confeitaria Artesanal</h1>
     <h2 class="fs-6 lead">Thayara Polizel</h2>
@@ -23,7 +24,7 @@ style="border-color: #3d2314 !important;">
             <input type="password" name="senha" id="senha" class="form-control">
         </div>
 
-        <button type="submit" class="btn text-white" style="background-color: #3d2314;">Entrar</button>
+        <button type="submit" class="btn text-white" style="background-color: var(--marrom-escuro);">Entrar</button>
     </form>
 
 </section>

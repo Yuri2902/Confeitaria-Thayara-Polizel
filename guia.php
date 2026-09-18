@@ -1,16 +1,18 @@
 <?php
+$pageTitle = 'Guia de Encomendas – Thayara Polizel';
 require_once __DIR__ . '/config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 ?>
 
-  <div style="background:linear-gradient(135deg,#f7e0db ,#fff8f6);padding:40px 0 20px;text-align:center;">
+  <section style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo));padding:40px 0 20px;text-align:center;">
     <h1>Guia de Encomendas</h1>
     <p class="subtitulo">Tudo que você precisa saber para montar seu pedido perfeito</p>
-  </div>
+  </section>
 
   <div class="container py-5">
 
     <!-- TAMANHOS E RENDIMENTO -->
+    <section>
     <h2 class="text-center mb-4">Tamanhos e Rendimento</h2>
     <div class="row g-4 mb-5 justify-content-center">
 
@@ -51,8 +53,10 @@ require_once BASE_PATH . '/includes/cabecalho.php';
       </div>
 
     </div>
+    </section>
 
     <!-- RECHEIOS -->
+    <section>
     <h2 class="text-center mb-4">Escolha os Recheios</h2>
     <div class="row g-4 mb-5">
 
@@ -116,6 +120,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
       </div>
 
     </div>
+    </section>
 
     <!-- REGRAS -->
     <div class="guia-card" style="max-width:640px;margin:0 auto 50px;">
