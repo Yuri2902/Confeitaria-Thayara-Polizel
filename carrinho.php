@@ -1,18 +1,19 @@
 <?php
+$pageTitle = 'Carrinho – Thayara Polizel';
 require_once __DIR__ . '/config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 ?>
 
-  <div style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo));padding:40px 0 20px;text-align:center;">
+  <section style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo));padding:40px 0 20px;text-align:center;">
     <h1>Seu Carrinho</h1>
     <p class="subtitulo">Revise seus itens antes de finalizar o pedido</p>
-  </div>
+  </section>
 
-  <div class="container py-5">
+  <section class="container py-5">
     <div class="row g-4">
 
       <!-- LISTA DE ITENS -->
-      <div class="col-lg-8">
+      <div class="col-lg-8" id="col-lista">
         <a href="<?= BASE_URL ?>/cardapio/cardapio.php" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
         <div class="painel-carrinho mt-3" id="lista-carrinho">
           <!-- preenchido pelo JS -->
@@ -50,12 +51,12 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             </div>
           </div>
 
-          <button class="btn-thay btn-thay-primary w-100 mt-3" onclick="finalizarPedido()"
+          <button type="button" class="btn-thay btn-thay-primary w-100 mt-3" onclick="finalizarPedido()"
             style="border:none;font-family:'Lato',sans-serif;width:100%;display:block;text-align:center;">
             💬 Finalizar via WhatsApp
           </button>
 
-          <button class="btn-thay btn-thay-outline w-100 mt-2" onclick="confirmarLimpar()"
+          <button type="button" class="btn-thay btn-thay-outline w-100 mt-2" onclick="confirmarLimpar()"
             style="border:1.5px solid #e5a095; font-family:'Lato',sans-serif; width:100%; display:block; text-align:center;font-size:12px;">
             🗑 Limpar carrinho
           </button>
@@ -63,7 +64,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
       </div>
 
     </div>
-  </div>
+  </section>
 
 <!-- RODAPÉ -->
 <?php require_once BASE_PATH. '/includes/rodape.php'?>
@@ -75,6 +76,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
       const itens = carregarCarrinho();
       const lista = document.getElementById('lista-carrinho');
       const resumo = document.getElementById('resumo');
+      const colLista = document.getElementById('col-lista');
 
       if (itens.length === 0) {
         lista.innerHTML = `
@@ -85,9 +87,16 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
           </div>`;
         resumo.style.display = 'none';
+        // Sem resumo pra mostrar ao lado, a lista deixa de dividir a
+        // linha em 8/4 colunas e passa a ocupar uma faixa central,
+        // pra não ficar "grudada" na esquerda em telas largas.
+        colLista.classList.remove('col-lg-8');
+        colLista.classList.add('col-lg-6', 'mx-auto');
         return;
       }
 
+      colLista.classList.remove('col-lg-6', 'mx-auto');
+      colLista.classList.add('col-lg-8');
       resumo.style.display = 'block';
 
       lista.innerHTML = itens.map(item => `
@@ -99,14 +108,14 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <div class="preco">${fmt(item.preco)} / unidade</div>
           </div>
           <div class="controle-qtd">
-            <button class="btn-qtd" onclick="mudarQtd(${item.id}, -1)">−</button>
+            <button type="button" class="btn-qtd" onclick="mudarQtd(${item.id}, -1)">−</button>
             <span class="qtd-display">${item.qtd}</span>
-            <button class="btn-qtd" onclick="mudarQtd(${item.id}, +1)">+</button>
+            <button type="button" class="btn-qtd" onclick="mudarQtd(${item.id}, +1)">+</button>
           </div>
           <div style="min-width:70px;text-align:right;font-weight:700;color:var(--marrom);font-size:14px;">
             ${fmt(item.preco * item.qtd)}
           </div>
-          <button class="btn-remover" onclick="remover(${item.id})" title="Remover">✕</button>
+          <button type="button" class="btn-remover" onclick="remover(${item.id})" title="Remover">✕</button>
         </div>
       `).join('');
 

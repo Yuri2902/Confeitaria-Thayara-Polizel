@@ -1,4 +1,5 @@
-<?php 
+<?php
+  $pageTitle = 'Thayara Polizel – Confeitaria Artesanal';
   require_once __DIR__ . '/config.php';
   require_once BASE_PATH . '/includes/cabecalho.php';
 ?>
@@ -14,10 +15,10 @@
   </div>
 
   <!-- SOBRE -->
-  <div class="container secao">
+  <section class="container secao">
     <div class="row align-items-center g-5">
       <div class="col-md-6 text-center">
-        <img src="fotos/thay foto menor.jpg" alt="Thayara Polizel"
+        <img src="<?= BASE_URL ?>/fotos/thay foto menor.jpg" alt="Thayara Polizel"
           style="width:220px;height:220px;object-fit:cover;border-radius:50%;box-shadow:0 6px 24px rgba(107,64,50,0.2);border:5px solid var(--rosa-pastel);"
           onerror="this.style.display='none'">
       </div>
@@ -29,10 +30,10 @@
         <a href="<?= BASE_URL ?>/guia.php" class="btn-thay btn-thay-outline">Monte seu pedido →</a>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- NOSSOS PRODUTOS -->
-  <div style="background:var(--rosa-pastel); padding: 60px 0;">
+  <section style="background:var(--rosa-pastel); padding: 60px 0;">
     <div class="container">
       <div class="secao-titulo">
         <h2>Nossos Produtos</h2>
@@ -40,52 +41,52 @@
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-6 col-md-4">
-          <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="card-categoria">
-            <img src="fotos/MiniBolo1.png" alt="Mini Bolos" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Mini+Bolos'">
+          <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="card-categoria">
+            <img src="<?= BASE_URL ?>/fotos/MiniBolo1.png" alt="Mini Bolos" loading="lazy" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Mini+Bolos'">
             <div class="cat-label">Mini Bolos</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
-          <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="card-categoria">
-            <img src="fotos/BoloDecorado1.png" alt="Bolos Decorados" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Bolos+Decorados'">
+          <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="card-categoria">
+            <img src="<?= BASE_URL ?>/fotos/BoloDecorado1.png" alt="Bolos Decorados" loading="lazy" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Bolos+Decorados'">
             <div class="cat-label">Bolos Decorados</div>
           </a>
         </div>
         <div class="col-6 col-md-4">
           <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="card-categoria">
-            <img src="fotos/Kit1.png" alt="Kit Festa" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Kit+Festa'">
+            <img src="<?= BASE_URL ?>/fotos/Kit1.png" alt="Kit Festa" loading="lazy" onerror="this.src='https://placehold.co/400x300/f7e0db/6b4032?text=Kit+Festa'">
             <div class="cat-label">Kit Festa</div>
           </a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- DEPOIMENTOS -->
-  <div class="container secao">
+  <section class="container secao">
     <div class="secao-titulo">
       <h2>O Que Dizem Nossos Clientes</h2>
       <p class="subtitulo">Feedbacks reais de quem já pediu</p>
     </div>
     <div class="row g-3 justify-content-center">
       <div class="col-6 col-md-3">
-        <img src="fotos/feedback2.png" alt="Depoimento" class="feedback-img w-100"
-          onerror="this.style.display='none'">
+        <img src="<?= BASE_URL ?>/fotos/feedback2.png" alt="Print de conversa de WhatsApp: cliente diz que os doces são surreais de bons e agradece por &quot;adoçar a vida&quot;." class="feedback-img w-100"
+          loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="col-6 col-md-3">
-        <img src="fotos/feedback4.png" alt="Depoimento" class="feedback-img w-100"
-          onerror="this.style.display='none'">
+        <img src="<?= BASE_URL ?>/fotos/feedback4.png" alt="Print de conversa de WhatsApp: cliente agradece pelo bolo lindo e delicioso, diz que todo mundo amou e que virará cliente fiel." class="feedback-img w-100"
+          loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="col-6 col-md-3">
-        <img src="fotos/feedback3.png" alt="Depoimento" class="feedback-img w-100"
-          onerror="this.style.display='none'">
+        <img src="<?= BASE_URL ?>/fotos/feedback3.png" alt="Print de conversa de WhatsApp: cliente elogia os doces e se declara super fã." class="feedback-img w-100"
+          loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="col-6 col-md-3">
-        <img src="fotos/feedback1.png" alt="Depoimento" class="feedback-img w-100"
-          onerror="this.style.display='none'">
+        <img src="<?= BASE_URL ?>/fotos/feedback1.png" alt="Print de conversa de WhatsApp: cliente elogia os sabores maracujá, doce de leite e brigadeiro, e agradece pelo capricho no pedido." class="feedback-img w-100"
+          loading="lazy" onerror="this.style.display='none'">
       </div>
     </div>
-  </div>
+  </section>
 
 <!-- RODAPÉ -->
 <?php require_once BASE_PATH. '/includes/rodape.php'?>

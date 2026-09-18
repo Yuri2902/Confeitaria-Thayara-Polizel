@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Painel Administrativo – Cardápio';
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
@@ -14,16 +15,16 @@ try {
 }
 ?>
 
-<section class="text-center mb-4 border rounded-3 p-4" style="border-color: #3d2314 !important;">
+<section class="text-center mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
     <h3><i class="bi bi-cup-straw"></i> Cardapio</h3>
 
 <?php if($erro){ ?>
     <p class="alert alert-danger text-center"><?= $erro ?></p>
 <?php } ?>
 
-    <P>
-        <a class="btn text-white" style="background-color: #3d2314;" href="<?= BASE_URL ?>/administradora/cardapio-adm_inserir.php"><i class="bi bi-plus-circle"></i> Adicionar novo produto</a>
-    </P>
+    <p>
+        <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/administradora/cardapio-adm_inserir.php"><i class="bi bi-plus-circle"></i> Adicionar novo produto</a>
+    </p>
 
     <div class="table-responsive">
         <table class="table table-hover caption-top">

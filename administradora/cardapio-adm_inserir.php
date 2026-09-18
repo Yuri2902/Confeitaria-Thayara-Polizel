@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Adicionar Produto – Painel Administrativo';
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
@@ -39,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 ?>
 
-<section class="mb-4 border rounded-3 p-4" style="border-color: #3d2314 !important;">
+<section class="mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
     <h3 class="text-center"><i class="bi bi-plus-circle-fill"></i> Adicionar Produto</h3>
 
     <form action="" method="post" enctype="multipart/form-data" class="w-75 mx-auto">

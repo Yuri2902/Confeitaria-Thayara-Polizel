@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . '/../config.php';
 ?>
-<!-- REDES SOCIAIS / RODAPÉ  -->
-  <div class="rodape">
+  </main>
+
+  <!-- REDES SOCIAIS / RODAPÉ  -->
+  <footer class="rodape">
     <div class="social-icons">
       <a href="https://instagram.com" target="_blank" title="Instagram">
         <img src="<?= BASE_URL ?>/fotos/IconInstagram.png" alt="Instagram" onerror="this.parentElement.textContent='📸'">
@@ -14,10 +16,10 @@ require_once __DIR__ . '/../config.php';
     <p style="margin:0; font-size:13px; color:var(--rosa-pastel);">
       &copy; 2026 Thayara Polizel – Confeitaria Artesanal · Zona Sul, São Paulo
     </p>
-    <p style="margin-top:6px; font-size:11px; color:var(--rosa-claro); opacity:0.7;">
+    <p style="margin-top:6px; font-size:11px; color:var(--rosa-pastel); opacity:0.85;">
       Pedidos com antecedência mínima de 72h
     </p>
-  </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="<?= BASE_URL ?>/js/carrinho.js"></script>

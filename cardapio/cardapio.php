@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Cardápio – Thayara Polizel';
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
@@ -15,10 +16,10 @@ try {
 ?>
 
   <!-- Cabeçalho da página -->
-  <div style="background:linear-gradient(135deg,#f7e0db,#fff8f6); padding:40px 0 20px; text-align:center;">
+  <section style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo)); padding:40px 0 20px; text-align:center;">
     <h1>Nosso Cardápio</h1>
     <p class="subtitulo">Explore nossa vitrine de produtos artesanais de alta qualidade</p>
-  </div>
+  </section>
 
   <?php if($erro){ ?>
     <p class="alert alert-danger text-center"><?= $erro ?></p>
@@ -27,10 +28,10 @@ try {
   <!-- Filtro de categorias -->
   <div class="container my-4 text-center">
     <div class="d-flex gap-2 justify-content-center flex-wrap" id="filtros">
-      <button class="btn-thay btn-thay-primary ativo-filtro" data-cat="todos">Todos</button>
-      <button class="btn-thay btn-thay-outline" data-cat="brigadeiro">Brigadeiros</button>
-      <button class="btn-thay btn-thay-outline" data-cat="mini">Mini Doces</button>
-      <button class="btn-thay btn-thay-outline" data-cat="caixa">Caixas</button>
+      <button type="button" class="btn-thay btn-thay-primary ativo-filtro" data-cat="todos">Todos</button>
+      <button type="button" class="btn-thay btn-thay-outline" data-cat="brigadeiro">Brigadeiros</button>
+      <button type="button" class="btn-thay btn-thay-outline" data-cat="mini">Mini Doces</button>
+      <button type="button" class="btn-thay btn-thay-outline" data-cat="caixa">Caixas</button>
     </div>
   </div>
 
@@ -55,7 +56,7 @@ try {
 
       grid.innerHTML = lista.map(p => `
         <div class="col-6 col-md-4 col-lg-3">
-          <div class="card-produto">
+          <article class="card-produto">
             <div class="card-img-wrap">
               <img src="<?= BASE_URL ?>/${p.img}" alt="${p.nome}" loading="lazy"
                 onerror="this.src='https://placehold.co/300x300/f7e0db/6b4032?text=${encodeURIComponent(p.nome)}'">
@@ -64,15 +65,15 @@ try {
               <div class="card-title">${p.nome}</div>
               <div class="card-preco">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</div>
               <div class="controle-qtd">
-                <button class="btn-qtd" onclick="decrementar(${p.id})">−</button>
+                <button type="button" class="btn-qtd" onclick="decrementar(${p.id})">−</button>
                 <span class="qtd-display" id="qtd-${p.id}">1</span>
-                <button class="btn-qtd" onclick="incrementar(${p.id})">+</button>
+                <button type="button" class="btn-qtd" onclick="incrementar(${p.id})">+</button>
               </div>
-              <button class="btn-add" id="btn-${p.id}" onclick="adicionarAoCarrinho(${p.id})">
+              <button type="button" class="btn-add" id="btn-${p.id}" onclick="adicionarAoCarrinho(${p.id})">
                 🛒 Adicionar
               </button>
             </div>
-          </div>
+          </article>
         </div>
       `).join('');
     }
