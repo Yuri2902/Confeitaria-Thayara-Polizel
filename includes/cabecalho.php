@@ -23,7 +23,7 @@ function classeAtiva(string $arquivo, string $paginaAtual): string {
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <header>
     <!-- TOPO -->
@@ -60,4 +60,4 @@ function classeAtiva(string $arquivo, string $paginaAtual): string {
     </nav>
   </header>
 
-  <main>
+  <main class="flex-grow-1">

@@ -15,9 +15,9 @@ if(!$id){
 
 try {
     $produto = buscarProdutoPorId($conexao, $id);
-    if(!$produto) $erro = "Usuário não encontrado";
+    if(!$produto) $erro = "Produto não encontrado";
 } catch (Throwable $e) {
-    $erro = "Erro ao buscar usuário <br>" . $e->getMessage();
+    $erro = "Erro ao buscar produto <br>" . $e->getMessage();
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -33,21 +33,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK ) {
                 //bloco que move a imagem Antiga para um backup
-                $enderecoFotoAntiga = BASE_PATH .'/'. $caminhoBanco;
-                $nomeFotoAntiga = basename($caminhoBanco);
-                $destinoBackup = BASE_PATH . '/fotos/backup/'.$nomeFotoAntiga;
-                if(file_exists($enderecoFotoAntiga)){
-                    rename($enderecoFotoAntiga, $destinoBackup);
-                }
+                if (!empty($caminhoBanco)) {
+                    $origem = BASE_PATH . "/" . $caminhoBanco;
+                    $destino = BASE_PATH . "/fotos/backup/". basename($caminhoBanco);
+        
+                    if (file_exists($origem)) {
+                        rename($origem, $destino);
+                    }
+                } 
 
                 //bloco de inserir a nova imagem na pasta
                 $img = $_FILES['img'];
                 $nomeImagem = uniqid() . '_' . $img['name'];
                 $enderecoImagem= BASE_PATH . '/fotos/img/' . $nomeImagem;
+
                 move_uploaded_file($img['tmp_name'], $enderecoImagem);
                 $caminhoBanco = 'fotos/img/' . $nomeImagem;
-
-                }
+            }
 
             atualizarProduto($conexao, $id, $nome, $preco, $cat, $caminhoBanco);
             header("location:cardapio-adm.php");
