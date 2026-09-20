@@ -49,7 +49,7 @@ try {
                     <td><?= $produtos['preco'] ?></td>
                     <td><?= $produtos['cat'] ?></td>
                     <td><a href="cardapio-adm_editar.php?id=<?= $produtos['id'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a></td>
-                    <td><a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a></td>
+                    <td><a href="cardapio-adm_excluir.php?id=<?= $produtos['id'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a></td>
                 </tr>
 <?php  endforeach; ?>
 
