@@ -37,6 +37,9 @@ function classeAtiva(string $arquivo, string $paginaAtual): string {
       <a href="<?= BASE_URL ?>/administradora/cardapio-adm.php" class="btn btn-sm btn-outline-light">
         <i class="bi bi-building-lock"></i> Administradora
       </a>
+      <button id="btn-libras" type="button" aria-pressed="false" class="btn btn-sm btn-outline-light">
+        Ativar Libras (VLibras)
+      </button>
     </div>
 
     <!-- NAVBAR Bootstrap Navbar -->
@@ -61,3 +64,51 @@ function classeAtiva(string $arquivo, string $paginaAtual): string {
   </header>
 
   <main class="flex-grow-1">
+
+<script>
+const btnLibras = document.getElementById('btn-libras');
+let librasCarregado = false;
+let librasAtivo = false;
+
+function carregarVLibras() {
+  document.body.insertAdjacentHTML('beforeend', `
+    <div vw class="enabled" id="vlibras-container">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+  `);
+
+  const script = document.createElement('script');
+  script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+  script.onload = () => {
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+    setTimeout(() => {
+      document.querySelector('[vw-access-button]')?.click();
+    }, 800);
+  };
+  document.body.appendChild(script);
+}
+
+btnLibras.addEventListener('click', () => {
+  librasAtivo = !librasAtivo;
+
+  if (librasAtivo && !librasCarregado) {
+    librasCarregado = true;
+    carregarVLibras();
+  }
+
+  document.querySelectorAll('[vw]').forEach(el => {
+    if (librasAtivo) {
+      el.style.removeProperty('display');
+    } else {
+      el.style.setProperty('display', 'none', 'important');
+    }
+  });
+
+  btnLibras.setAttribute('aria-pressed', librasAtivo);
+  btnLibras.classList.toggle('active', librasAtivo);
+  btnLibras.textContent = librasAtivo ? 'Desativar Libras' : 'Ativar Libras (VLibras)';
+});
+</script>
