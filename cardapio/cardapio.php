@@ -16,7 +16,7 @@ try {
 ?>
 
   <!-- Cabeçalho da página -->
-  <section style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo)); padding:40px 0 20px; text-align:center;">
+  <section style="background:linear-gradient(135deg,var(--superficie-2),var(--fundo)); padding:40px 0 20px; text-align:center;">
     <h1>Nosso Cardápio</h1>
     <p class="subtitulo">Explore nossa vitrine de produtos artesanais de alta qualidade</p>
   </section>

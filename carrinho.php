@@ -4,7 +4,7 @@ require_once __DIR__ . '/config.php';
 require_once BASE_PATH . '/includes/cabecalho.php';
 ?>
 
-  <section style="background:linear-gradient(135deg,var(--rosa-pastel),var(--rosa-fundo));padding:40px 0 20px;text-align:center;">
+  <section style="background:linear-gradient(135deg,var(--superficie-2),var(--fundo));padding:40px 0 20px;text-align:center;">
     <h1>Seu Carrinho</h1>
     <p class="subtitulo">Revise seus itens antes de finalizar o pedido</p>
   </section>
@@ -13,8 +13,8 @@ require_once BASE_PATH . '/includes/cabecalho.php';
     <div class="row g-4">
 
       <!-- LISTA DE ITENS -->
-      <div class="col-lg-8" id="col-lista">
-        <a href="<?= BASE_URL ?>/cardapio/cardapio.php" style="color:var(--marrom-claro);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
+      <div class="col-lg-8">
+        <a href="<?= BASE_URL ?>/cardapio/cardapio.php" style="color:var(--texto-suave);font-size:13px;text-decoration:none;">← Voltar ao Cardápio</a>
         <div class="painel-carrinho mt-3" id="lista-carrinho">
           <!-- preenchido pelo JS -->
         </div>
@@ -37,17 +37,13 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <span id="total">R$ 0,00</span>
           </div>
 
-          <div style="margin-top:20px; background:#ffffff; border-radius: 8px; padding:14px; font-size:13px;">
-            <strong style="color:#6b4032;">📋 Dados do Pedido</strong>
+          <div style="margin-top:20px; background:var(--superficie); border-radius: 8px; padding:14px; font-size:13px;">
+            <strong style="color:var(--titulo);">📋 Dados do Pedido</strong>
             <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
-              <input type="text" id="campo-nome" placeholder="Seu nome completo"
-                style="border:1px solid #e5a095; border-radius: 8px; padding:8px 12px; font-size:13px; width:100%; outline:none; font-family:'Lato',sans-serif;">
-              <input type="tel" id="campo-tel" placeholder="WhatsApp (ex: 11 9 9999-9999)"
-                style="border:1px solid #e5a095; border-radius:8px; padding:8px 12px; font-size:13px; width:100%; outline:none; font-family:'Lato',sans-serif;">
-              <input type="text" id="campo-data" placeholder="Data desejada p/ retirada"
-                style="border:1px solid #e5a095; border-radius:8px; padding:8px 12px; font-size:13px; width:100%; outline:none; font-family:'Lato',sans-serif;">
-              <textarea id="campo-obs" placeholder="Observações (opcional)"
-                style="border:1px solid #e5a095;border-radius:8px; padding:8px 12px; font-size:13px; width:100%; outline:none; font-family:'Lato',sans-serif;resize:vertical;min-height:60px;"></textarea>
+              <input type="text" id="campo-nome" class="campo-pedido" placeholder="Seu nome completo">
+              <input type="tel" id="campo-tel" class="campo-pedido" placeholder="WhatsApp (ex: 11 9 9999-9999)">
+              <input type="text" id="campo-data" class="campo-pedido" placeholder="Data desejada p/ retirada">
+              <textarea id="campo-obs" class="campo-pedido" placeholder="Observações (opcional)"></textarea>
             </div>
           </div>
 
@@ -57,7 +53,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
           </button>
 
           <button type="button" class="btn-thay btn-thay-outline w-100 mt-2" onclick="confirmarLimpar()"
-            style="border:1.5px solid #e5a095; font-family:'Lato',sans-serif; width:100%; display:block; text-align:center;font-size:12px;">
+            style="border:1.5px solid var(--borda); font-family:'Lato',sans-serif; width:100%; display:block; text-align:center;font-size:12px;">
             🗑 Limpar carrinho
           </button>
         </div>
@@ -76,7 +72,6 @@ require_once BASE_PATH . '/includes/cabecalho.php';
       const itens = carregarCarrinho();
       const lista = document.getElementById('lista-carrinho');
       const resumo = document.getElementById('resumo');
-      const colLista = document.getElementById('col-lista');
 
       if (itens.length === 0) {
         lista.innerHTML = `
@@ -87,16 +82,9 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="btn-thay btn-thay-primary" style="text-decoration:none;">Ver Cardápio</a>
           </div>`;
         resumo.style.display = 'none';
-        // Sem resumo pra mostrar ao lado, a lista deixa de dividir a
-        // linha em 8/4 colunas e passa a ocupar uma faixa central,
-        // pra não ficar "grudada" na esquerda em telas largas.
-        colLista.classList.remove('col-lg-8');
-        colLista.classList.add('col-lg-6', 'mx-auto');
         return;
       }
 
-      colLista.classList.remove('col-lg-6', 'mx-auto');
-      colLista.classList.add('col-lg-8');
       resumo.style.display = 'block';
 
       lista.innerHTML = itens.map(item => `
@@ -112,7 +100,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
             <span class="qtd-display">${item.qtd}</span>
             <button type="button" class="btn-qtd" onclick="mudarQtd(${item.id}, +1)">+</button>
           </div>
-          <div style="min-width:70px;text-align:right;font-weight:700;color:var(--marrom);font-size:14px;">
+          <div style="min-width:70px;text-align:right;font-weight:700;color:var(--titulo);font-size:14px;">
             ${fmt(item.preco * item.qtd)}
           </div>
           <button type="button" class="btn-remover" onclick="remover(${item.id})" title="Remover">✕</button>

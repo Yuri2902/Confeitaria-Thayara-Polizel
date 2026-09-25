@@ -1,8 +1,11 @@
 <?php
-$pageTitle = 'Painel Administrativo – Cardápio';
 require_once __DIR__ . '/../config.php';
-require_once BASE_PATH . '/includes/cabecalho.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
+
+exigirAdmin();
+
+$pageTitle = 'Painel Administrativo – Cardápio';
+require_once BASE_PATH . '/includes/cabecalho.php';
 
 $erro = null;
 $produtosBanco = [];
@@ -15,15 +18,16 @@ try {
 }
 ?>
 
-<section class="text-center mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
+<section class="text-center mb-4 border rounded-3 p-4" style="border-color: var(--borda) !important;">
     <h3><i class="bi bi-cup-straw"></i> Cardapio</h3>
 
 <?php if($erro){ ?>
     <p class="alert alert-danger text-center"><?= $erro ?></p>
 <?php } ?>
 
-    <p>
+    <p class="d-flex gap-2 justify-content-center flex-wrap">
         <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/administradora/cardapio-adm_inserir.php"><i class="bi bi-plus-circle"></i> Adicionar novo produto</a>
+        <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/administradora/loja-status.php"><i class="bi bi-shop"></i> Abrir / fechar a loja</a>
     </p>
 
     <div class="table-responsive">
@@ -43,12 +47,12 @@ try {
 
 <?php  foreach($produtosBanco as $produtos): ?>
                 <tr>
-                    <td><img src="<?= BASE_URL ?>/<?= $produtos['img'] ?>" width="50" /></td>
+                    <td><img src="<?= BASE_URL ?>/<?= $produtos['img'] ?>" alt="<?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?>" width="50" /></td>
                     <td><?= $produtos['id'] ?></td>
-                    <td><?= $produtos['nome'] ?></td>
+                    <td><?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?></td>
                     <td><?= $produtos['preco'] ?></td>
-                    <td><?= $produtos['cat'] ?></td>
-                    <td><a href="cardapio-adm_editar.php?id=<?= $produtos['id'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a></td>
+                    <td><?= htmlspecialchars($produtos['cat'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><a href="" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a></td>
                     <td><a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a></td>
                 </tr>
 <?php  endforeach; ?>

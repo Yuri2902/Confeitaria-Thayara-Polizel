@@ -22,31 +22,3 @@ function inserirProduto(PDO $conexao, string $nome, float $preco, string $cat, s
 
     $consulta->execute();
 }
-
-function buscarProdutoPorId(PDO $conexao, int $id): ?array
-{
-    $sql = "SELECT * FROM produtos WHERE id = :id";
-    $consulta = $conexao->prepare($sql);
-    $consulta -> bindValue(":id", $id);
-    $consulta->execute();
-
-    $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-    return $resultado ?: null;
-}
-
-function atualizarProduto(
-    PDO $conexao, int $id, string $nome, float $preco, string $cat, string $img): void
-{
-    $sql = "UPDATE produtos SET nome = :nome, preco = :preco, cat= :cat, img= :img
-    WHERE id = :id";
-
-    $consulta = $conexao->prepare($sql);
-
-    $consulta->bindValue(":nome", $nome);
-    $consulta->bindValue(":preco", $preco);
-    $consulta->bindValue(":cat", $cat);
-    $consulta->bindValue(":img", $img);
-    $consulta->bindValue(":id", $id);
-
-    $consulta->execute();
-}

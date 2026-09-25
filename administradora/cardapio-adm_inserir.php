@@ -1,8 +1,8 @@
 <?php
-$pageTitle = 'Adicionar Produto – Painel Administrativo';
 require_once __DIR__ . '/../config.php';
-require_once BASE_PATH . '/includes/cabecalho.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
+
+exigirAdmin();
 
 $erro = null;
 
@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             
             inserirProduto($conexao, $nome, $preco, $cat, $caminhoBanco);
             //redireciona de volta a tela anterior
-            header("location:cardapio-adm.php");
+            header('Location: ' . BASE_URL . '/administradora/cardapio-adm.php');
             exit;
         } catch (Throwable $e) {
             if ($e->getCode() === '23000') {//verifica se repetiu a chave primaria
@@ -38,15 +38,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 }
 
+$pageTitle = 'Adicionar Produto – Painel Administrativo';
+require_once BASE_PATH . '/includes/cabecalho.php';
 ?>
 
-<section class="mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
+<section class="mb-4 border rounded-3 p-4" style="border-color: var(--borda) !important;">
     <h3 class="text-center"><i class="bi bi-plus-circle-fill"></i> Adicionar Produto</h3>
+
+<?php if ($erro): ?>
+    <p class="alert alert-danger text-center"><?= $erro ?></p>
+<?php endif; ?>
 
     <form action="" method="post" enctype="multipart/form-data" class="w-75 mx-auto">
         <div class="form-group">
             <label for="nome" class="form-label">Nome: </label>
-            <input required value="<?= $_POST['nome'] ?? '' ?>" type="text" name="nome" id="nome" class="form-control">
+            <input required value="<?= htmlspecialchars($_POST['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?>" type="text" name="nome" id="nome" class="form-control">
         </div>
 
         <div class="form-group mb-3">
