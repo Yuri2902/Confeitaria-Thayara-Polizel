@@ -1,3 +1,15 @@
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
 <?php
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/verifica_loja.php';
@@ -17,7 +29,7 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
 <html lang="pt-BR">
 <?php require_once BASE_PATH . '/includes/head.php'; ?>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <header>
 
@@ -85,4 +97,4 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
     </nav>
   </header>
 
-  <main>
+  <main class="flex-grow-1">
