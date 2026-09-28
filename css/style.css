@@ -3,14 +3,7 @@
    Stylesheet compartilhado
    ========================================= */
 
-/* ── PALETA DA MARCA (design tokens) ─────────
-   Antes, essas cores estavam "espalhadas" como
-   texto literal (#6b4032, #f7e0db...) em dezenas
-   de lugares — inclusive em algumas páginas que já
-   tentavam usar var(--rosa-pastel) etc. sem que a
-   variável existisse em lugar nenhum do projeto.
-   Centralizar aqui corrige isso e vira 1 lugar só
-   para mudar a cor da marca no futuro.           */
+/* ── PALETA DA MARCA ──────────────────────── */
 :root{
   --rosa-fundo: #fff8f6;
   --rosa-pastel: #f7e0db;
@@ -20,15 +13,78 @@
   --marrom-claro: #7a5a52;
   --marrom-escuro: #3d2314;
   --radius: 12px;
+
+  --fundo:          var(--rosa-fundo);   /* fundo da página        */
+  --superficie:     #ffffff;             /* cards, painéis         */
+  --superficie-2:   var(--rosa-pastel);  /* blocos rosados         */
+  --texto:          var(--marrom-escuro);
+  --texto-suave:    var(--marrom-claro);
+  --titulo:         var(--marrom);
+  --destaque:       var(--rosa-escuro);  /* fundo de botão         */
+  --destaque-texto: var(--rosa-escuro);  /* preços, números        */
+  --borda:          var(--rosa-claro);
+  --sombra:         rgba(107,64,50,.12);
+  --sombra-forte:   rgba(107,64,50,.20);
+  --navbar-bg:      #d67c6d;
+  --navbar-texto:   #ffffff;
+  --nav-link:       var(--marrom);
+  --banner-1:       var(--rosa-claro);
+  --banner-2:       #d67c6d;
+  --banner-3:       var(--rosa-escuro);
+  --premium-bg:     #fff8e1;
+  --premium-borda:  #f0c040;
+  --premium-texto:  #7a5900;
 }
+
+/* ── MODO ESCURO ──────────────────────────── */
+html[data-tema="escuro"]{
+  --rosa-fundo:    #171010;
+  --rosa-pastel:   #f0d7d1; /* continua clara, é usada como texto sobre o marrom */
+  --rosa-claro:    #5e3f38;
+  --rosa-escuro:   #d9705e;
+  --marrom:        #2b1e1a;
+  --marrom-claro:  #b79a92;
+  --marrom-escuro: #241a17;
+
+  --fundo:          #171010;
+  --superficie:     #221917;
+  --superficie-2:   #2b201d;
+  --texto:          #f0e4e0;
+  --texto-suave:    #bda49d;
+  --titulo:         #f5ded8;
+  --destaque:       #d9705e;
+  --destaque-texto: #f09a89;
+  --borda:          #422e2a;
+  --sombra:         rgba(0,0,0,.45);
+  --sombra-forte:   rgba(0,0,0,.60);
+  --navbar-bg:      #2b201d;
+  --navbar-texto:   #f5ded8;
+  --nav-link:       #e7cdc6;
+  --banner-1:       #4a2f2a;
+  --banner-2:       #6b3d34;
+  --banner-3:       #8a4a3c;
+  --premium-bg:     #3a2f14;
+  --premium-borda:  #8a6d1f;
+  --premium-texto:  #f0d68a;
+}
+
+body, .card-produto, .guia-card, .painel-carrinho,
+.rodape, .navbar-thay, .card-categoria, .cat-label{
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; }
+}
+
 
 *, *::before, *::after { box-sizing: border-box; }
 
 body{
   margin:0;
   font:15px/1.6 'Lato',sans-serif;
-  background:var(--rosa-fundo);
-  color:var(--marrom-escuro);
+  background:var(--fundo);
+  color:var(--texto);
 }
 
 /* ── BARRA DE TOPO ───────────────────────── */
@@ -43,12 +99,12 @@ body{
 
 /* ── NAVBAR ──────────────────────────────── */
 .navbar-thay{
-  background:#d67c6d;
+  background:var(--navbar-bg);
   padding:0 24px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  box-shadow:0 2px 8px rgba(107,64,50,.12);
+  box-shadow:0 2px 8px var(--sombra);
   position:sticky;
   top:0;
   z-index:1000;
@@ -59,7 +115,7 @@ body{
   align-items:center;
   gap:10px;
   padding:12px 0;
-  color:#fff;
+  color:var(--navbar-texto);
   text-decoration:none;
   font:600 1.1rem 'Playfair Display',serif;
 }
@@ -82,7 +138,7 @@ body{
   display:block;
   padding:10px 16px;
   border-radius:8px;
-  color:var(--marrom);
+  color:var(--nav-link);
   text-decoration:none;
   text-transform:uppercase;
   font:700 13px 'Lato',sans-serif;
@@ -120,10 +176,10 @@ body{
 .navbar-toggler-thay{
   display:none;
   padding:6px 10px;
-  border:2px solid var(--marrom);
+  border:2px solid var(--nav-link);
   border-radius:8px;
   background:none;
-  color:var(--marrom);
+  color:var(--nav-link);
   font-size:18px;
   cursor:pointer;
 }
@@ -143,8 +199,8 @@ body{
     position:absolute;
     inset:100% 0 auto;
     padding:12px;
-    background:#d67c6d;
-    box-shadow:0 4px 12px rgba(107,64,50,.12);
+    background:var(--navbar-bg);
+    box-shadow:0 4px 12px var(--sombra);
   }
 
   .navbar-thay .nav-links.aberto{ display:flex; }
@@ -158,7 +214,7 @@ body{
 
 /* ── TIPOGRAFIA ──────────────────────────── */
 h1,h2,h3{
-  color:var(--marrom);
+  color:var(--titulo);
   font-family:'Playfair Display',serif;
 }
 
@@ -167,7 +223,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 
 .subtitulo{
   margin-top:-8px;
-  color:var(--marrom-claro);
+  color:var(--texto-suave);
   font-size:14px;
   letter-spacing:.04em;
 }
@@ -187,8 +243,8 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 }
 
 .btn-thay-primary{
-  background:var(--rosa-escuro);
-  border-color:var(--rosa-escuro);
+  background:var(--destaque);
+  border-color:var(--destaque);
   color:#fff;
 }
 
@@ -199,12 +255,12 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 
 .btn-thay-outline{
   background:transparent;
-  border-color:var(--rosa-claro);
-  color:var(--marrom);
+  border-color:var(--borda);
+  color:var(--texto);
 }
 
 .btn-thay-outline:hover{
-  background:var(--rosa-pastel);
+  background:var(--superficie-2);
   border-color:var(--marrom);
 }
 
@@ -216,21 +272,21 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   overflow:hidden;
   border:none;
   border-radius:var(--radius);
-  background:#fff;
-  box-shadow:0 3px 14px rgba(107,64,50,.12);
+  background:var(--superficie);
+  box-shadow:0 3px 14px var(--sombra);
   transition:.25s;
 }
 
 .card-produto:hover{
   transform:translateY(-4px);
-  box-shadow:0 8px 24px rgba(107,64,50,.18);
+  box-shadow:0 8px 24px var(--sombra-forte);
 }
 
 .card-img-wrap{
   position:relative;
   overflow:hidden;
   aspect-ratio:1;
-  background:var(--rosa-pastel);
+  background:var(--superficie-2);
 }
 
 .card-img-wrap img{
@@ -253,14 +309,14 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 
 .card-title{
   margin-bottom:4px;
-  color:var(--marrom);
+  color:var(--titulo);
   text-transform:uppercase;
   font:700 13px 'Lato',sans-serif;
 }
 
 .card-preco{
   margin-bottom:auto;
-  color:var(--rosa-escuro);
+  color:var(--destaque-texto);
   font-size:15px;
   font-weight:700;
 }
@@ -275,10 +331,10 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 .btn-qtd{
   width:28px;
   height:28px;
-  border:1.5px solid var(--rosa-claro);
+  border:1.5px solid var(--borda);
   border-radius:50%;
-  background:var(--rosa-fundo);
-  color:var(--marrom);
+  background:var(--superficie);
+  color:var(--texto);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -289,15 +345,15 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 }
 
 .btn-qtd:hover{
-  background:var(--rosa-escuro);
-  border-color:var(--rosa-escuro);
+  background:var(--destaque);
+  border-color:var(--destaque);
   color:#fff;
 }
 
 .qtd-display{
   min-width:20px;
   text-align:center;
-  color:var(--marrom);
+  color:var(--texto);
   font-size:15px;
   font-weight:700;
 }
@@ -308,7 +364,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   padding:8px 12px;
   border:none;
   border-radius:8px;
-  background:var(--rosa-escuro);
+  background:var(--destaque);
   color:#fff;
   cursor:pointer;
   text-align:center;
@@ -328,7 +384,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   padding:80px 24px;
   text-align:center;
   color:#fff;
-  background:linear-gradient(135deg,var(--rosa-claro) 0%,#d67c6d 60%,var(--rosa-escuro) 100%);
+  background:linear-gradient(135deg,var(--banner-1) 0%,var(--banner-2) 60%,var(--banner-3) 100%);
 }
 
 .banner-thay::before{
@@ -372,16 +428,16 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   display:block;
   overflow:hidden;
   border-radius:12px;
-  background:#fff;
+  background:var(--superficie);
   color:inherit;
   text-decoration:none;
-  box-shadow:0 3px 14px rgba(107,64,50,.12);
+  box-shadow:0 3px 14px var(--sombra);
   transition:.25s;
 }
 
 .card-categoria:hover{
   transform:translateY(-5px);
-  box-shadow:0 10px 28px rgba(107,64,50,.2);
+  box-shadow:0 10px 28px var(--sombra-forte);
 }
 
 .card-categoria img{
@@ -399,8 +455,8 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   padding:14px 16px;
   text-align:center;
   text-transform:uppercase;
-  color:var(--marrom);
-  background:#fff;
+  color:var(--titulo);
+  background:var(--superficie);
   font:700 14px 'Lato',sans-serif;
 }
 
@@ -409,7 +465,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   max-width:100%;
   height:auto;
   border-radius:12px;
-  box-shadow:0 4px 16px rgba(107,64,50,.12);
+  box-shadow:0 4px 16px var(--sombra);
 }
 
 /* ── RODAPÉ ──────────────────────────────── */
@@ -448,8 +504,8 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 /* ── CARRINHO ────────────────────────────── */
 .painel-carrinho{
   padding:28px;
-  background:#fff;
-  box-shadow:0 3px 20px rgba(107,64,50,.12);
+  background:var(--superficie);
+  box-shadow:0 3px 20px var(--sombra);
 }
 
 .item-carrinho{
@@ -457,7 +513,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   align-items:center;
   gap:14px;
   padding:14px 0;
-  border-bottom:1px solid var(--rosa-pastel);
+  border-bottom:1px solid var(--borda);
 }
 
 .item-carrinho img{
@@ -465,7 +521,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   height:70px;
   object-fit:cover;
   border-radius:8px;
-  background:var(--rosa-pastel);
+  background:var(--superficie-2);
 }
 
 .item-carrinho .info{ flex:1; }
@@ -476,8 +532,8 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   font-weight:700;
 }
 
-.item-carrinho .nome{ color:var(--marrom); }
-.item-carrinho .preco{ color:var(--rosa-escuro); }
+.item-carrinho .nome{ color:var(--titulo); }
+.item-carrinho .preco{ color:var(--destaque-texto); }
 
 .item-carrinho .controle-qtd{ gap:6px; }
 
@@ -485,7 +541,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   padding:4px;
   border:none;
   background:none;
-  color:var(--marrom-claro);
+  color:var(--texto-suave);
   cursor:pointer;
   font-size:18px;
   transition:.25s;
@@ -496,22 +552,22 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 .resumo-carrinho{
   padding:22px;
   border-radius:12px;
-  background:var(--rosa-pastel);
+  background:var(--superficie-2);
 }
 
 .resumo-carrinho .linha{
   display:flex;
   justify-content:space-between;
   margin-bottom:10px;
-  color:var(--marrom-claro);
+  color:var(--texto-suave);
   font-size:14px;
 }
 
 .resumo-carrinho .total{
   margin-top:6px;
   padding-top:10px;
-  border-top:1px solid var(--rosa-claro);
-  color:var(--marrom);
+  border-top:1px solid var(--borda);
+  color:var(--titulo);
   font-size:18px;
   font-weight:700;
 }
@@ -521,8 +577,8 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   margin-bottom:20px;
   padding:24px;
   border-radius:12px;
-  background:#fff;
-  box-shadow:0 3px 14px rgba(107,64,50,.12);
+  background:var(--superficie);
+  box-shadow:0 3px 14px var(--sombra);
 }
 
 .tamanho-badge{
@@ -530,7 +586,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   margin-bottom:8px;
   padding:4px 14px;
   border-radius:30px;
-  background:var(--rosa-escuro);
+  background:var(--destaque);
   color:#fff;
   font-size:12px;
   font-weight:700;
@@ -538,7 +594,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 }
 
 .rendimento{
-  color:var(--rosa-escuro);
+  color:var(--destaque-texto);
   font:700 28px 'Playfair Display',serif;
 }
 
@@ -546,20 +602,20 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   display:inline-block;
   margin:3px;
   padding:4px 12px;
-  border:1px solid var(--rosa-claro);
+  border:1px solid var(--borda);
   border-radius:20px;
-  background:var(--rosa-fundo);
-  color:var(--marrom);
+  background:var(--superficie);
+  color:var(--texto);
   font-size:12px;
   transition:.25s;
 }
 
-.tag-recheio:hover{ background:var(--rosa-pastel); }
+.tag-recheio:hover{ background:var(--superficie-2); }
 
 .tag-recheio.premium{
-  background:#fff8e1;
-  border-color:#f0c040;
-  color:#7a5900;
+  background:var(--premium-bg);
+  border-color:var(--premium-borda);
+  color:var(--premium-texto);
 }
 
 /* ── TOAST NOTIFICAÇÃO ───────────────────── */
@@ -589,7 +645,7 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
 .empty-state{
   padding:60px 20px;
   text-align:center;
-  color:var(--marrom-claro);
+  color:var(--texto-suave);
 }
 
 .empty-state .icone{
@@ -597,3 +653,154 @@ h2{ font-size:clamp(1.4rem,3vw,2rem); }
   font-size:64px;
   opacity:.5;
 }
+/* ── BOTÃO DE TEMA ────────────────────────── */
+.btn-tema{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 12px;
+  border:1px solid rgba(255,255,255,.45);
+  border-radius:30px;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  font:600 12px 'Lato',sans-serif;
+  line-height:1.6;
+  transition:.25s;
+}
+
+.btn-tema:hover{
+  background:rgba(255,255,255,.14);
+  border-color:#fff;
+}
+
+.btn-tema .icone-tema{ font-size:14px; }
+
+/* ── CAMPOS DO PEDIDO (carrinho) ───────────── */
+.campo-pedido{
+  width:100%;
+  padding:8px 12px;
+  border:1px solid var(--borda);
+  border-radius:8px;
+  background:var(--superficie);
+  color:var(--texto);
+  font:13px 'Lato',sans-serif;
+  outline:none;
+  transition:.2s;
+}
+
+.campo-pedido:focus{
+  border-color:var(--destaque);
+  box-shadow:0 0 0 3px var(--sombra);
+}
+
+.campo-pedido::placeholder{ color:var(--texto-suave); }
+
+textarea.campo-pedido{
+  resize:vertical;
+  min-height:60px;
+}
+
+/* ── AVISO DE LOJA FECHADA (só para a admin) ── */
+.barra-loja-fechada{
+  padding:8px 16px;
+  text-align:center;
+  background:#b3261e;
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+}
+
+.barra-loja-fechada a{
+  color:#fff;
+  text-decoration:underline;
+}
+
+/* ── TELA DE LOJA FECHADA (o que o cliente vê) ── */
+.tela-fechada{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:40px 24px;
+  text-align:center;
+  background:linear-gradient(160deg,var(--banner-1) 0%,var(--banner-2) 55%,var(--banner-3) 100%);
+}
+
+.tela-fechada .cartao{
+  width:100%;
+  max-width:520px;
+  padding:44px 32px;
+  border-radius:20px;
+  background:var(--superficie);
+  box-shadow:0 16px 48px rgba(0,0,0,.28);
+}
+
+.tela-fechada .simbolo{
+  width:82px;
+  height:82px;
+  margin-bottom:18px;
+  object-fit:contain;
+}
+
+.tela-fechada h1{
+  margin:0 0 6px;
+  font-size:clamp(1.5rem,4vw,2rem);
+}
+
+.tela-fechada .selo{
+  display:inline-block;
+  margin-bottom:22px;
+  padding:5px 18px;
+  border-radius:30px;
+  background:var(--superficie-2);
+  color:var(--titulo);
+  text-transform:uppercase;
+  font:700 11px 'Lato',sans-serif;
+  letter-spacing:.1em;
+}
+
+.tela-fechada .recado{
+  margin:0 0 26px;
+  color:var(--texto);
+  font-size:16px;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+.tela-fechada .contatos{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.tela-fechada .rodape-aviso{
+  margin-top:26px;
+  padding-top:18px;
+  border-top:1px solid var(--borda);
+  color:var(--texto-suave);
+  font-size:12px;
+}
+
+.tela-fechada .rodape-aviso a{
+  color:var(--texto-suave);
+  text-decoration:underline;
+}
+
+/* ── PAINEL DE STATUS DA LOJA (admin) ───────── */
+.status-loja{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 16px;
+  border-radius:30px;
+  font:700 13px 'Lato',sans-serif;
+}
+
+.status-loja.aberta{ background:#d8f0dd; color:#14532d; }
+.status-loja.fechada{ background:#f8d7da; color:#7a1a14; }
+
+html[data-tema="escuro"] .status-loja.aberta{ background:#1c3a26; color:#9ee0b0; }
+html[data-tema="escuro"] .status-loja.fechada{ background:#4a1d1a; color:#f5a8a2; }
