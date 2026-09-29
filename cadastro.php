@@ -48,8 +48,8 @@ style="border-color: var(--borda) !important;">
     <h2 class="fs-6 lead">Thayara Polizel</h2>
 
     <hr>
-    <h3>Login</h3>
-    <p class="lead">Entre com seu email e senha para acessar o sistema.</p>
+    <h3>Cadastro</h3>
+    <p class="lead">Cadastre seu email e senha para acessar o sistema.</p>
 
 <?php if ($erro): ?>
     <p class="alert alert-danger w-50 mx-auto"><?= $erro ?></p>
@@ -67,7 +67,7 @@ style="border-color: var(--borda) !important;">
         </div>
 
         <button type="submit" class="btn text-white" style="background-color: var(--marrom-escuro);">Entrar</button>
-        <button class="btn text-white" style="background-color: var(--marrom-escuro);"><a class="text-decoration-none text-white" href="<?= BASE_URL ?>/cadastro.php">Não tem uma conta? Clique aqui</a></button>
+        <button class="btn text-white" style="background-color: var(--marrom-escuro);"><a class="text-decoration-none text-white" href="<?= BASE_URL ?>/login.php">Já tem uma conta? Clique aqui para logar</a></button>
     </form>
 
 </section>
