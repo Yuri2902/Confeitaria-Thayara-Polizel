@@ -1,18 +1,6 @@
-<div vw class="enabled">
-  <div vw-access-button class="active"></div>
-  <div vw-plugin-wrapper>
-    <div class="vw-plugin-top-wrapper"></div>
-  </div>
-</div>
-
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>
-  new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>
-
 <?php
 require_once __DIR__ . '/../config.php';
-require_once __DIR__ . '/verifica_loja.php';
+verificarBloqueioLoja($conexao);
 
 //nome do arquivo atual, usado pro título da aba e pro menu ativo
 $paginaAtual = basename($_SERVER['PHP_SELF']);
@@ -30,6 +18,19 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
 <?php require_once BASE_PATH . '/includes/head.php'; ?>
 
 <body class="d-flex flex-column min-vh-100">
+
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
 
   <header>
 

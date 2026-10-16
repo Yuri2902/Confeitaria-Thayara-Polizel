@@ -9,7 +9,7 @@
     <h1>Doces feitos com alma</h1>
     <p>Confeitaria artesanal com criações personalizadas para tornar seus momentos ainda mais especiais. Cada peça feita com amor, dedicação e ingredientes selecionados.</p>
     <div class="botoes">
-      <a href="<?= BASE_URL ?>cardapio/cardapio.php" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
+      <a href="<?= BASE_URL ?>/cardapio/cardapio.php" class="btn-thay btn-thay-primary">Ver Cardápio Completo</a>
       <a href="<?= BASE_URL ?>/guia.php" class="btn-thay btn-thay-outline" style="color:#fff;border-color:rgba(255,255,255,0.7);">Monte Seu Bolo</a>
     </div>
   </div>
@@ -89,4 +89,4 @@
   </section>
 
 <!-- RODAPÉ -->
-<?php require_once BASE_PATH. '/includes/rodape.php'?>
+<?php require_once BASE_PATH. '/includes/rodape.php';?>

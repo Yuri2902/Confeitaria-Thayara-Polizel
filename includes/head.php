@@ -1,6 +1,3 @@
-<?php
-require_once __DIR__ . '/../config.php';
-?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,19 +14,12 @@ require_once __DIR__ . '/../config.php';
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <script>
-    //aplica o tema aqui no head pra não piscar branco antes de escurecer
-    (function () {
-      var tema;
-      try { tema = localStorage.getItem('thay_tema'); } catch (e) { tema = null; }
-
-      if (!tema) {
-        var sistemaEscuro = window.matchMedia &&
-                            window.matchMedia('(prefers-color-scheme: dark)').matches;
-        tema = sistemaEscuro ? 'escuro' : 'claro';
-      }
-
-      document.documentElement.setAttribute('data-tema', tema);
-      document.documentElement.setAttribute('data-bs-theme', tema === 'escuro' ? 'dark' : 'light');
-    })();
+    let tema = localStorage.getItem('thay_tema');
+    if (!tema && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      tema = 'escuro';
+    }
+    document.documentElement.setAttribute('data-tema', tema || 'claro');
+    document.documentElement.setAttribute('data-bs-theme', tema === 'escuro' ? 'dark' : 'light');
   </script>
+  
 </head>

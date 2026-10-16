@@ -50,7 +50,7 @@ try {
                     <td><img src="<?= BASE_URL ?>/<?= $produtos['img'] ?>" alt="<?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?>" width="50" /></td>
                     <td><?= $produtos['id'] ?></td>
                     <td><?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?></td>
-                    <td><?= $produtos['preco'] ?></td>
+                    <td>R$ <?= number_format($produtos['preco'], 2, ',', '.') ?></td>
 
                     <td><?= htmlspecialchars($produtos['cat'], ENT_QUOTES, 'UTF-8') ?></td>
                     <td><a href="cardapio-adm_editar.php?id=<?= $produtos['id'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a></td>

@@ -144,4 +144,4 @@ require_once BASE_PATH . '/includes/cabecalho.php';
   </div>
 
 <!-- RODAPÉ -->
-<?php require_once BASE_PATH. '/includes/rodape.php'?>
+<?php require_once BASE_PATH. '/includes/rodape.php';?>

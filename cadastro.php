@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/config.php";
+require_once BASE_PATH . "/src/usuarios_crud.php";
 
 $erro = null;
 
@@ -17,47 +18,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha     = $_POST['senha'] ?? '';
     $confirmar = $_POST['confirmar_senha'] ?? '';
 
-    $telefoneDigitos = preg_replace('/\D/', '', $telefone);
-    $dataObj = DateTime::createFromFormat('Y-m-d', $dataNasc);
-    $dataValida = $dataObj && $dataObj->format('Y-m-d') === $dataNasc;
-
-    if ($nome === '' || $email === '' || $dataNasc === '' || $endereco === '' || $telefone === '' || $senha === '' || $confirmar === '') {
+    if (empty($nome) || empty($email) || empty($dataNasc) || empty($endereco) || empty($telefone) || empty($senha)) {
         $erro = "Preencha todos os campos.";
-    } elseif (mb_strlen($nome) > 100) {
-        $erro = "O nome deve ter no máximo 100 caracteres.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 150) {
-        $erro = "E-mail inválido.";
-    } elseif (!$dataValida || $dataObj > new DateTime('today')) {
-        $erro = "Data de nascimento inválida.";
-    } elseif (mb_strlen($endereco) > 255) {
-        $erro = "O endereço deve ter no máximo 255 caracteres.";
-    } elseif (strlen($telefoneDigitos) < 10 || strlen($telefoneDigitos) > 11) {
-        $erro = "Telefone inválido. Informe o DDD e o número.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "Informe um e-mail válido.";
     } elseif (strlen($senha) < 6) {
         $erro = "A senha deve ter pelo menos 6 caracteres.";
     } elseif ($senha !== $confirmar) {
-        $erro = "As senhas não conferem.";
+        $erro = "As senhas não coincidem.";
     } else {
         try {
-            $stmt = $conexao->prepare("SELECT id FROM usuarios WHERE email = ?");
-            $stmt->execute([$email]);
+            $usuarioExistente = buscarUsuarioPorEmail($conexao, $email);
 
-            if ($stmt->fetch()) {
+            if ($usuarioExistente) {
                 $erro = "Este e-mail já está cadastrado.";
             } else {
-                $hash = password_hash($senha, PASSWORD_DEFAULT);
-                $stmt = $conexao->prepare(
-                    "INSERT INTO usuarios (nome, email, senha, data_nasc, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?)"
-                );
-                $stmt->execute([$nome, $email, $hash, $dataNasc, $endereco, $telefoneDigitos]);
+                inserirUsuario($conexao, $nome, $email, $senha, $dataNasc, $endereco, $telefone);
 
                 tentarLogin($conexao, $email, $senha);
                 header('Location: ' . BASE_URL . '/index.php');
                 exit;
             }
         } catch (Throwable $e) {
-            error_log($e->getMessage());
-            $erro = "Não foi possível concluir o cadastro.";
+            $erro = "Não foi possível concluir o cadastro.".$e->getMessage();
         }
     }
 }
@@ -80,7 +63,7 @@ style="border-color: var(--borda) !important;">
     <p class="alert alert-danger w-50 mx-auto"><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></p>
 <?php endif; ?>
 
-    <form action="" method="post" class="w-50 mx-auto text-start mt-3">
+    <form action="" method="post" class="col-12 col-md-8 col-lg-6 mx-auto text-start mt-3">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" name="nome" id="nome" class="form-control" maxlength="100" required
@@ -115,8 +98,10 @@ style="border-color: var(--borda) !important;">
             <input type="password" name="confirmar_senha" id="confirmar_senha" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn text-white" style="background-color: var(--marrom-escuro);">Criar</button>
-        <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/login.php">Já tem uma conta? Clique aqui para logar</a>
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn text-white" style="background-color: var(--marrom-escuro);">Criar conta</button>
+            <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/login.php">Já tem uma conta? Clique aqui para logar</a>
+        </div>
     </form>
 
 </section>

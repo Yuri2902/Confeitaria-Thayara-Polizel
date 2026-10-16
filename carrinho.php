@@ -63,7 +63,7 @@ require_once BASE_PATH . '/includes/cabecalho.php';
   </section>
 
 <!-- RODAPÉ -->
-<?php require_once BASE_PATH. '/includes/rodape.php'?>
+<?php require_once BASE_PATH. '/includes/rodape.php';?>
   
   <script>
     function fmt(v) { return 'R$ ' + Number(v).toFixed(2).replace('.', ','); }

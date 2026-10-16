@@ -8,7 +8,7 @@ $banco = "confeitaria_artesanal";
 
 try {
     $conexao = new PDO(
-    "mysql:host=$servidor; dbname=$banco; charset=utf8", $usuario, $senha
+    "mysql:host=$servidor; dbname=$banco; charset=utf8mb4", $usuario, $senha
     );
 
     //habilitando o lançamento de erros e exceções

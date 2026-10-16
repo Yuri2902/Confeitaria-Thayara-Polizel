@@ -1,11 +1,12 @@
 <?php
 $pageTitle = 'Editar Produto – Painel Administrativo';
 require_once __DIR__ . "/../config.php";
-require_once BASE_PATH . "/src/cardapio_crud.php";
-require_once BASE_PATH . "/includes/cabecalho.php";
-require_once BASE_PATH . "/src/utils.php";
 
-$id = sanitizar($_GET['id'], 'inteiro');
+exigirAdmin();
+
+require_once BASE_PATH . "/src/cardapio_crud.php";
+
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $erro = null;
 
 if(!$id){
@@ -65,6 +66,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 }
 
+require_once BASE_PATH . "/includes/cabecalho.php";
 ?>
 
 <section class="mb-4 border rounded-3 p-4" style="border-color: var(--marrom-escuro) !important;">
@@ -77,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <form action="" method="post" enctype="multipart/form-data" class="w-75 mx-auto">
         <div class="form-group">
             <label for="nome" class="form-label">Nome: </label>
-            <input required value="<?= $produto['nome'] ?? '' ?>" type="text" name="nome" id="nome" class="form-control">
+            <input required value="<?= htmlspecialchars($produto['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?>" type="text" name="nome" id="nome" class="form-control">
         </div>
 
         <div class="form-group mb-3">

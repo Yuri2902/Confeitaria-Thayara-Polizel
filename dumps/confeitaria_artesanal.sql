@@ -10,7 +10,27 @@ CREATE TABLE IF NOT EXISTS produtos (
     cat VARCHAR(50) NOT NULL
 );
 
--- 2. Inserção dos Dados Iniciais do Cardápio
+-- 2. TABELA DE USUÁRIOS
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    data_nasc DATE NULL,
+    endereco VARCHAR(255) NULL,
+    telefone VARCHAR(20) NULL,
+    perfil ENUM('admin', 'cliente') NOT NULL DEFAULT 'cliente',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Criação da Tabela de Configurações
+CREATE TABLE IF NOT EXISTS configuracoes (
+    chave VARCHAR(60) PRIMARY KEY,
+    valor TEXT NOT NULL,
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Inserção dos Dados Iniciais do Cardápio
 INSERT INTO produtos (id, nome, preco, img, cat) VALUES
 (1,  'Brigadeiros Clássicos',          4.50,  'fotos/img/1.png',  'brigadeiro'),
 (2,  'Brigadeiros Especiais',           5.50,  'fotos/img/2.png',  'brigadeiro'),
@@ -37,30 +57,18 @@ INSERT INTO produtos (id, nome, preco, img, cat) VALUES
 (23, 'Mini Churros Recheado',           5.50,  'fotos/img/23.png', 'mini'),
 (24, 'Mini Cone Recheado',              5.00,  'fotos/img/24.png', 'mini');
 
--- 3. Criação da Tabela de Usuários
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL,
-    perfil ENUM('admin', 'cliente') NOT NULL DEFAULT 'cliente',
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 4. Conta inicial da administradora (email: admin@thayarapolizel.com, senha: admin123 - trocar depois)
+-- Conta inicial da administradora (email: admin@thayarapolizel.com, senha: admin123 - trocar depois)
 INSERT INTO usuarios (nome, email, senha, perfil) VALUES
 ('Thayara Polizel', 'admin@thayarapolizel.com',
  '$2y$10$UvzHmBuFMa3yPhDwoAwl5OTx403TwmUvCF657U1UI8EarVotnUEC2', 'admin')
 ON DUPLICATE KEY UPDATE email = email;
 
--- 5. Criação da Tabela de Configurações
-CREATE TABLE IF NOT EXISTS configuracoes (
-    chave VARCHAR(60) PRIMARY KEY,
-    valor TEXT NOT NULL,
-    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+-- Cliente padrão inicial para testes (email: cliente@msn.com, senha: cliente123 - trocar depois)
+INSERT INTO usuarios (nome, email, senha, data_nasc, endereco, telefone, perfil) VALUES
+('Cliente', 'cliente@msn.com', '$2y$10$/mAX7Ygkl5v.a1c7Op.xh.U7IzeDtiDdukN7YddCb7/lQe5hYW2cK', '2004-10-16', 'Rua das Flores, 123', '11987654321', 'cliente')
+ON DUPLICATE KEY UPDATE email = email;
 
--- 6. Valores iniciais da loja
+-- Valores iniciais da loja
 INSERT INTO configuracoes (chave, valor) VALUES
 ('loja_aberta', '1'),
 ('loja_mensagem', 'Estamos temporariamente fora do ar para novos pedidos.\n\nObrigada pela paciência — em breve as encomendas voltam a ser aceitas por aqui. 💗')

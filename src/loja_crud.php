@@ -57,3 +57,19 @@ function definirStatusLoja(PDO $conexao, bool $aberta, string $mensagem): void
     salvarConfiguracao($conexao, CHAVE_LOJA_ABERTA, $aberta ? '1' : '0');
     salvarConfiguracao($conexao, CHAVE_LOJA_MENSAGEM, $mensagem);
 }
+
+function verificarBloqueioLoja(PDO $conexao): void
+{
+    $paginasSempreLiberadas = ['login.php', 'logout.php', 'loja-fechada.php'];
+    $arquivoAtual = basename($_SERVER['PHP_SELF']);
+    $ehPaginaAdmin = strpos($_SERVER['PHP_SELF'], '/administradora/') !== false;
+
+    $precisaVerificar = !in_array($arquivoAtual, $paginasSempreLiberadas, true)
+                        && !$ehPaginaAdmin
+                        && !ehAdministrador();
+
+    if ($precisaVerificar && !lojaEstaAberta($conexao)) {
+        require_once BASE_PATH . '/loja-fechada.php';
+        exit;
+    }
+}

@@ -54,6 +54,11 @@ try {
       const grid = document.getElementById('grid-produtos');
       const lista = filtro === 'todos' ? produtos : produtos.filter(p => p.cat === filtro);
 
+      if (lista.length === 0) {
+        grid.innerHTML = `<p class="text-center text-muted my-5">Nenhum produto encontrado nesta categoria no momento. 🧁</p>`;
+        return;
+      }
+
       grid.innerHTML = lista.map(p => `
         <div class="col-6 col-md-4 col-lg-3">
           <article class="card-produto">

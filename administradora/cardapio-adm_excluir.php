@@ -1,10 +1,11 @@
 <?php
 require_once __DIR__ . "/../config.php";
-require_once BASE_PATH . "/src/utils.php";
-require_once BASE_PATH . "/src/cardapio_crud.php";
-require_once BASE_PATH . "/includes/cabecalho.php";
 
-$id = sanitizar($_GET['id'], 'inteiro');
+exigirAdmin();
+
+require_once BASE_PATH . "/src/cardapio_crud.php";
+
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $erro = null;
 
 if(!$id){
@@ -39,7 +40,7 @@ if (isset($_GET['confirmar-exclusao']) && !$erro) {
         $erro = "Erro ao excluir produto: <br>".$e->getMessage();
     }
 }
-
+require_once BASE_PATH . "/includes/cabecalho.php";
 ?>
 
 <section class="mb-4 border rounded-3 p-4">
