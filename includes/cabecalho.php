@@ -68,6 +68,15 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
                 <i class="bi bi-box-arrow-right"></i> Sair
               </a>
             <?php endif; ?>
+            
+            <?php if ($usuarioAtual !== null): ?>
+              <?php if(date('m-d') == date('m-d', strtotime($usuarioAtual['data_nasc']))) { ?>
+                  <div class="position-absolute start-50 translate-middle-x">
+                      <span class="text-center text-warning fw-bold small">
+                        🎉 Feliz Aniversário! Você tem descontos especiais hoje!</span>
+                  </div>
+              <?php } ?>
+            <?php endif; ?>
 
             <button type="button" id="btn-tema" class="btn-tema ms-auto" aria-pressed="false">
               <span class="icone-tema" aria-hidden="true">🌙</span>

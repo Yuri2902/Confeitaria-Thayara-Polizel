@@ -2,7 +2,7 @@
 
 function buscarUsuarioPorEmail(PDO $conexao, string $email): ?array
 {
-    $sql = "SELECT id, nome, email, senha, perfil
+    $sql = "SELECT id, nome, email, senha, perfil, data_nasc
             FROM usuarios
             WHERE email = :email
             LIMIT 1";

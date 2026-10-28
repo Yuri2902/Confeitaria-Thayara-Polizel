@@ -28,6 +28,7 @@ function tentarLogin(PDO $conexao, string $email, string $senha): bool
         'nome'   => $usuario['nome'],
         'email'  => $usuario['email'],
         'perfil' => $usuario['perfil'],
+        'data_nasc' => $usuario['data_nasc']
     ];
 
     return true;
