@@ -55,8 +55,6 @@ CREATE TABLE IF NOT EXISTS configuracoes (
     atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-
-
 -- Administradora (email: admin@thayarapolizel.com, senha: admin123 - trocar depois)
 INSERT INTO usuarios (nome, email, senha, perfil) VALUES
 ('Thayara Polizel', 'admin@thayarapolizel.com',
@@ -69,6 +67,34 @@ INSERT INTO usuarios (nome, email, senha, perfil, data_nasc, endereco, telefone)
  '$2y$10$/mAX7Ygkl5v.a1c7Op.xh.U7IzeDtiDdukN7YddCb7/lQe5hYW2cK',
  'cliente', '2004-10-16', 'Rua das Flores, 123', '11987654321')
 ON DUPLICATE KEY UPDATE email = email;
+SET @id_admin = (SELECT id_usuario FROM usuarios WHERE email = 'admin@thayarapolizel.com');
+
+
+INSERT INTO produtos (nome, preco, img, cat, id_usuario) VALUES
+('Brigadeiros Clássicos',          4.50,  'fotos/img/1.png',  'brigadeiro', @id_admin),
+('Brigadeiros Especiais',          5.50,  'fotos/img/2.png',  'brigadeiro', @id_admin),
+('Surpresa de Uva',                5.00,  'fotos/img/3.png',  'brigadeiro', @id_admin),
+('Brigadeiros Premium',            7.00,  'fotos/img/4.png',  'brigadeiro', @id_admin),
+('Brigadeiro Floral',              6.50,  'fotos/img/5.png',  'brigadeiro', @id_admin),
+('Camafeu com Chocolate',          6.00,  'fotos/img/6.png',  'brigadeiro', @id_admin),
+('Bombom de Cereja',               6.00,  'fotos/img/7.png',  'caixa',      @id_admin),
+('Caixa de Pistache',              12.00, 'fotos/img/8.png',  'caixa',      @id_admin),
+('Caixa de Uva',                   11.00, 'fotos/img/9.png',  'caixa',      @id_admin),
+('Coração Aberto',                 18.00, 'fotos/img/10.png', 'caixa',      @id_admin),
+('Coração Fechado',                20.00, 'fotos/img/11.png', 'caixa',      @id_admin),
+('Pirâmide de Frutas Vermelhas',   22.00, 'fotos/img/12.png', 'caixa',      @id_admin),
+('Pirulito de Chocolate',          5.00,  'fotos/img/13.png', 'mini',       @id_admin),
+('Bem Casado de Colher',           6.50,  'fotos/img/14.png', 'mini',       @id_admin),
+('Cake Pop Quadrado',              6.00,  'fotos/img/15.png', 'mini',       @id_admin),
+('Mini Bolo de Cenoura',           14.00, 'fotos/img/16.png', 'mini',       @id_admin),
+('Mini Bombom de Uva',             5.50,  'fotos/img/17.png', 'mini',       @id_admin),
+('Mini Brownie',                   5.00,  'fotos/img/18.png', 'mini',       @id_admin),
+('Mini Brownie Recheado',          6.00,  'fotos/img/19.png', 'mini',       @id_admin),
+('Mini Tortinha de Limão',         7.00,  'fotos/img/20.png', 'mini',       @id_admin),
+('Mini Trufas',                    5.50,  'fotos/img/21.png', 'mini',       @id_admin),
+('Mini Maçã do Amor',              6.00,  'fotos/img/22.png', 'mini',       @id_admin),
+('Mini Churros Recheado',          5.50,  'fotos/img/23.png', 'mini',       @id_admin),
+('Mini Cone Recheado',             5.00,  'fotos/img/24.png', 'mini',       @id_admin);
 
 SET @id_admin = (SELECT id FROM usuarios WHERE email = 'admin@thayarapolizel.com');
 
