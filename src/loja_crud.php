@@ -73,3 +73,29 @@ function verificarBloqueioLoja(PDO $conexao): void
         exit;
     }
 }
+
+function finalizarPedido(PDO $conexao, int $idUsuario, string $dataEntrega, float $valorTotal, array $itens): int
+{
+    $sql = "INSERT INTO pedidos (data_emissao, id_usuario, data_entrega, valor_total) VALUES (CURDATE(), :id_usuario, :data_entrega, :valor_total)";
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(":id_usuario", $idUsuario);
+    $consulta->bindValue(":data_entrega", $dataEntrega);
+    $consulta->bindValue(":valor_total", $valorTotal);
+    $consulta->execute();
+    $idPedido = $conexao->lastInsertId();
+
+    foreach($itens as $item){
+        $sql2 = "INSERT INTO itens_pedido (id_pedido, id_produto, descricao, quantidade, preco_unitario, preco_total) VALUES
+         (:id_pedido, :id_produto, :descricao, :quantidade, :preco_unitario, :preco_total)";
+        $consulta = $conexao->prepare($sql2);
+        $consulta->bindValue(":id_pedido", $idPedido);
+        $consulta->bindValue(":id_produto", $item['id']);
+        $consulta->bindValue(":descricao", $item['nome']);
+        $consulta->bindValue(":quantidade", $item['qtd']);
+        $consulta->bindValue(":preco_unitario", $item['preco']);
+        $consulta->bindValue(":preco_total", $item['preco'] * $item['qtd']);
+        $consulta->execute();
+    }
+
+    return (int)$idPedido;
+}

@@ -1,6 +1,36 @@
 <?php
 $pageTitle = 'Carrinho – Thayara Polizel';
 require_once __DIR__ . '/config.php';
+require_once BASE_PATH . '/src/loja_crud.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  header('Content-Type: application/json');
+  $dados = json_decode(file_get_contents('php://input'), true);
+
+  if (!empty($dados['itens'])) {
+    $idUsuario = $usuarioAtual['id'] ?? $_SESSION['usuario']['id'] ?? null;
+
+    if (!$idUsuario) {
+        echo json_encode(['erro' => 'Usuário não autenticado']);
+        exit;
+    }
+
+    if (empty($dados['data_entrega'])) {
+      echo json_encode(['erro' => 'A data de retirada é obrigatória.']);
+      exit;
+    }
+
+    $dataEntrega = $dados['data_entrega'];
+    $valorTotal = (float) $dados['valor_total'];
+    $itens = $dados['itens'];
+
+    $idPedido = finalizarPedido($conexao, $idUsuario, $dataEntrega, $valorTotal, $itens);
+  
+    echo json_encode(['id_pedido' => $idPedido]);
+    exit;
+  }
+}
+
 require_once BASE_PATH . '/includes/cabecalho.php';
 
 if (!estaLogado()) {
@@ -10,6 +40,7 @@ if (!estaLogado()) {
           </script>";
     exit;
 }
+
 ?>
 
   <section style="background:linear-gradient(135deg,var(--superficie-2),var(--fundo));padding:40px 0 20px;text-align:center;">
@@ -168,30 +199,55 @@ if (!estaLogado()) {
 
       const nome  = "<?= htmlspecialchars($usuarioAtual['nome'], ENT_QUOTES, 'UTF-8') ?>";
       const data  = document.getElementById('campo-data').value.trim();
+      if (!data) {
+        alert('Por favor, selecione uma data para a retirada do pedido.');
+        document.getElementById('campo-data').focus();
+        return; // Para a execução aqui e não faz o fetch
+      }
       const obs   = document.getElementById('campo-obs').value.trim();
 
       const subtotal = totalValor();
       const desconto = ehAniversariante ? (subtotal * 0.10) : 0;
       const totalFinal = subtotal - desconto;
-      
-      let msg = `*Olá, Thayara!* Quero fazer um pedido 🎉\n\n`;
-      msg += `*Nome:* ${nome}\n`;
-      if (data) msg += `*Retirada:* ${data}\n`;
-      msg += `\n*Itens do Pedido:*\n`;
-      itens.forEach(i => {
-        msg += `• ${i.nome} x${i.qtd} — ${fmt(i.preco * i.qtd)}\n`;
-      });
-      msg += `\n*Subtotal:* ${fmt(subtotal)}\n`;
-      if (ehAniversariante) {
-        msg += `*Desconto Aniversário (10%):* -${fmt(desconto)}\n`;
-      }
-      msg += `\n*Total Final: ${fmt(totalFinal)}*`;
-      if (obs) msg += `\n\n*Obs:* ${obs}`;
 
-      // Número de WhatsApp fictício — substituir pelo real
-      const numero = '5511955557777';
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
+      fetch('carrinho.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body:  JSON.stringify({
+          data_entrega: data,
+          valor_total: totalFinal,
+          itens: itens
+        })
+      })
+      .then(resposta => resposta.json())
+      .then(dados => {
+
+        const idPedido = dados.id_pedido;
+      
+        let msg = `**Olá, Thayara!* Quero confirmar o *Pedido #${idPedido}* 🎉\n\n`;
+        msg += `*Nome:* ${nome}\n`;
+        if (data) msg += `*Retirada:* ${data}\n`;
+        msg += `\n*Itens do Pedido:*\n`;
+        itens.forEach(i => {
+          msg += `• ${i.nome} x${i.qtd} — ${fmt(i.preco * i.qtd)}\n`;
+        });
+        msg += `\n*Subtotal:* ${fmt(subtotal)}\n`;
+        if (ehAniversariante) {
+          msg += `*Desconto Aniversário (10%):* -${fmt(desconto)}\n`;
+        }
+        msg += `\n*Total Final: ${fmt(totalFinal)}*`;
+        if (obs) msg += `\n\n*Obs:* ${obs}`;
+
+        limparCarrinho();
+
+        // Número de WhatsApp fictício — substituir pelo real
+        const numero = '5511999998888';
+        window.location.href = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+      })
+      .catch(erro => {
+        console.error('Erro na requisição:', erro);
+        alert('Ocorreu um erro ao processar o pedido.');
+      });
     }
 
     renderizarCarrinho();

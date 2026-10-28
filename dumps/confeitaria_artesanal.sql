@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
     id_pedido    INT AUTO_INCREMENT PRIMARY KEY,
     data_emissao DATE NOT NULL,
     data_entrega DATE NULL,
-    forma_pgto   VARCHAR(50),
     valor_total  DECIMAL(10, 2) NOT NULL DEFAULT 0,
     id_usuario   INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
@@ -67,8 +66,7 @@ INSERT INTO usuarios (nome, email, senha, perfil, data_nasc, endereco, telefone)
  '$2y$10$/mAX7Ygkl5v.a1c7Op.xh.U7IzeDtiDdukN7YddCb7/lQe5hYW2cK',
  'cliente', '2004-10-16', 'Rua das Flores, 123', '11987654321')
 ON DUPLICATE KEY UPDATE email = email;
-SET @id_admin = (SELECT id_usuario FROM usuarios WHERE email = 'admin@thayarapolizel.com');
-
+SET @id_admin = (SELECT id FROM usuarios WHERE email = 'admin@thayarapolizel.com');
 
 INSERT INTO produtos (nome, preco, img, cat, id_usuario) VALUES
 ('Brigadeiros Clássicos',          4.50,  'fotos/img/1.png',  'brigadeiro', @id_admin),
