@@ -1,0 +1,67 @@
+<?php
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/src/cardapio_crud.php';
+
+exigirAdmin();
+
+$pageTitle = 'Painel Administrativo – Cardápio';
+require_once BASE_PATH . '/includes/cabecalho.php';
+
+$erro = null;
+$produtosBanco = [];
+
+//tentativa de conexão com o banco
+try {
+  $produtosBanco = buscarCardapio($conexao);
+} catch (Throwable $e) {
+  $erro = "Falha ao buscar Cardapio. Detalhes: <br>" .$e->getMessage();
+}
+?>
+
+<section class="text-center mb-4 border rounded-3 p-4" style="border-color: var(--borda) !important;">
+    <h3><i class="bi bi-cup-straw"></i> Cardapio</h3>
+
+<?php if($erro){ ?>
+    <p class="alert alert-danger text-center"><?= $erro ?></p>
+<?php } ?>
+
+    <p class="d-flex gap-2 justify-content-center flex-wrap">
+        <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/administradora/cardapio-adm_inserir.php"><i class="bi bi-plus-circle"></i> Adicionar novo produto</a>
+        <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/administradora/loja-status.php"><i class="bi bi-shop"></i> Abrir / fechar a loja</a>
+        <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/administradora/pedidos.php"><i class="bi bi-receipt"></i> Ver pedidos</a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-hover caption-top">
+            <caption>Quantidade de registros: <?= count($produtosBanco) ?> </caption>
+            <thead class="align-middle table-light">
+                <tr>
+                    <th>Imagem</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th colspan="2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+<?php  foreach($produtosBanco as $produtos): ?>
+                <tr>
+                    <td><img src="<?= BASE_URL ?>/<?= $produtos['img'] ?>" alt="<?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?>" width="50" /></td>
+                    <td><?= $produtos['id'] ?></td>
+                    <td><?= htmlspecialchars($produtos['nome'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td>R$ <?= number_format($produtos['preco'], 2, ',', '.') ?></td>
+
+                    <td><?= htmlspecialchars($produtos['cat'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><a href="cardapio-adm_editar.php?id=<?= $produtos['id'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a></td>
+                    <td><a href="cardapio-adm_excluir.php?id=<?= $produtos['id'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Excluir</a></td>
+                </tr>
+<?php  endforeach; ?>
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<?php require_once BASE_PATH . "/includes/rodape.php"; ?>
