@@ -28,6 +28,7 @@ try {
     <p class="d-flex gap-2 justify-content-center flex-wrap">
         <a class="btn text-white" style="background-color: var(--marrom-escuro);" href="<?= BASE_URL ?>/administradora/cardapio-adm_inserir.php"><i class="bi bi-plus-circle"></i> Adicionar novo produto</a>
         <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/administradora/loja-status.php"><i class="bi bi-shop"></i> Abrir / fechar a loja</a>
+        <a class="btn btn-outline-secondary" href="<?= BASE_URL ?>/administradora/pedidos.php"><i class="bi bi-receipt"></i> Ver pedidos</a>
     </p>
 
     <div class="table-responsive">
