@@ -1,4 +1,4 @@
-Drop DATABASE confeitaria_artesanal;
+DROP DATABASE IF EXISTS confeitaria_artesanal;
 CREATE DATABASE IF NOT EXISTS confeitaria_artesanal;
 USE confeitaria_artesanal;
 
@@ -94,38 +94,9 @@ INSERT INTO produtos (nome, preco, img, cat, id_usuario) VALUES
 ('Mini Churros Recheado',          5.50,  'fotos/img/23.png', 'mini',       @id_admin),
 ('Mini Cone Recheado',             5.00,  'fotos/img/24.png', 'mini',       @id_admin);
 
-SET @id_admin = (SELECT id FROM usuarios WHERE email = 'admin@thayarapolizel.com');
-
-INSERT INTO produtos (nome, preco, img, cat, id_usuario) VALUES
-('Brigadeiros Clássicos',          4.50,  'fotos/img/1.png',  'brigadeiro', @id_admin),
-('Brigadeiros Especiais',          5.50,  'fotos/img/2.png',  'brigadeiro', @id_admin),
-('Surpresa de Uva',                5.00,  'fotos/img/3.png',  'brigadeiro', @id_admin),
-('Brigadeiros Premium',            7.00,  'fotos/img/4.png',  'brigadeiro', @id_admin),
-('Brigadeiro Floral',              6.50,  'fotos/img/5.png',  'brigadeiro', @id_admin),
-('Camafeu com Chocolate',          6.00,  'fotos/img/6.png',  'brigadeiro', @id_admin),
-('Bombom de Cereja',               6.00,  'fotos/img/7.png',  'caixa',      @id_admin),
-('Caixa de Pistache',              12.00, 'fotos/img/8.png',  'caixa',      @id_admin),
-('Caixa de Uva',                   11.00, 'fotos/img/9.png',  'caixa',      @id_admin),
-('Coração Aberto',                 18.00, 'fotos/img/10.png', 'caixa',      @id_admin),
-('Coração Fechado',                20.00, 'fotos/img/11.png', 'caixa',      @id_admin),
-('Pirâmide de Frutas Vermelhas',   22.00, 'fotos/img/12.png', 'caixa',      @id_admin),
-('Pirulito de Chocolate',          5.00,  'fotos/img/13.png', 'mini',       @id_admin),
-('Bem Casado de Colher',           6.50,  'fotos/img/14.png', 'mini',       @id_admin),
-('Cake Pop Quadrado',              6.00,  'fotos/img/15.png', 'mini',       @id_admin),
-('Mini Bolo de Cenoura',           14.00, 'fotos/img/16.png', 'mini',       @id_admin),
-('Mini Bombom de Uva',             5.50,  'fotos/img/17.png', 'mini',       @id_admin),
-('Mini Brownie',                   5.00,  'fotos/img/18.png', 'mini',       @id_admin),
-('Mini Brownie Recheado',          6.00,  'fotos/img/19.png', 'mini',       @id_admin),
-('Mini Tortinha de Limão',         7.00,  'fotos/img/20.png', 'mini',       @id_admin),
-('Mini Trufas',                    5.50,  'fotos/img/21.png', 'mini',       @id_admin),
-('Mini Maçã do Amor',              6.00,  'fotos/img/22.png', 'mini',       @id_admin),
-('Mini Churros Recheado',          5.50,  'fotos/img/23.png', 'mini',       @id_admin),
-('Mini Cone Recheado',             5.00,  'fotos/img/24.png', 'mini',       @id_admin);
-
 -- Valores iniciais da loja
 INSERT INTO configuracoes (chave, valor) VALUES
 ('loja_aberta', '1'),
 ('loja_mensagem', 'Estamos temporariamente fora do ar para novos pedidos.\n\nObrigada pela paciência — em breve as encomendas voltam a ser aceitas por aqui. 💗')
 ON DUPLICATE KEY UPDATE valor = valor;
-SET @id_cliente = (SELECT id FROM usuarios WHERE email = 'cliente@msn.com');
 -- EXEMPLO: SALVAR UMA COMPRA COM VÁRIOS ITENS (opcional, para testar) Descomente para executar.

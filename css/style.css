@@ -804,3 +804,26 @@ textarea.campo-pedido{
 
 html[data-tema="escuro"] .status-loja.aberta{ background:#1c3a26; color:#9ee0b0; }
 html[data-tema="escuro"] .status-loja.fechada{ background:#4a1d1a; color:#f5a8a2; }
+
+/* ── PAINEL DE PEDIDOS (admin) ───────────────── */
+.accordion{
+  --bs-accordion-color: var(--texto);
+  --bs-accordion-bg: var(--superficie);
+  --bs-accordion-border-color: var(--borda);
+  --bs-accordion-btn-color: var(--texto);
+  --bs-accordion-btn-bg: var(--superficie);
+  --bs-accordion-btn-focus-border-color: var(--destaque);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 3px var(--sombra);
+  --bs-accordion-active-color: var(--titulo);
+  --bs-accordion-active-bg: var(--superficie-2);
+  --bs-accordion-body-color: var(--texto);
+  --bs-accordion-body-bg: var(--superficie);
+}
+
+.accordion-button:not(.collapsed)::after{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b4032'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+html[data-tema="escuro"] .accordion-button:not(.collapsed)::after{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f5ded8'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
