@@ -97,9 +97,22 @@ try {
     }
 
     function adicionarAoCarrinho(id) {
-      const p = produtos.find(x => x.id === id);
+      const p = produtos.find(x => Number(x.id) === Number(id));
+
+      if(!p){
+        console.error("Produto não encontrado", id)
+        return;
+      }
+
       const qtd = qtdsLocais[id] || 1;
-      adicionarItem({ ...p, qtd });
+
+      adicionarItem({
+        ...p,
+        id: Number(p.id),
+        preco: Number(p.preco),
+        img: `<?= BASE_URL ?>/${p.img}`,
+        qtd
+      });
 
       // Feedback visual no botão
       const btn = document.getElementById('btn-' + id);

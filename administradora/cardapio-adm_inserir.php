@@ -3,6 +3,7 @@ require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/src/cardapio_crud.php';
 
 exigirAdmin();
+$admin = usuarioLogado();
 
 $erro = null;
 
@@ -24,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $caminhoBanco = 'fotos/img/' . $nomeImagem;
             
-            inserirProduto($conexao, $nome, $preco, $cat, $caminhoBanco);
+            inserirProduto($conexao, $nome, $preco, $cat, $caminhoBanco, (int) $admin['id']);
             //redireciona de volta a tela anterior
             header('Location: ' . BASE_URL . '/administradora/cardapio-adm.php');
             exit;

@@ -8,10 +8,10 @@ function buscarCardapio(PDO $conexao): array
     return $consulta->fetchAll(PDO::FETCH_ASSOC);//sem o fetchAll, não retornaria em array
 }
 
-function inserirProduto(PDO $conexao, string $nome, float $preco, string $cat, string $img): void
+function inserirProduto(PDO $conexao, string $nome, float $preco, string $cat, string $img, int $idUsuario): void
 {
-    $sql = "INSERT INTO produtos (nome, preco, cat, img)
-            VALUES(:nome, :preco, :cat, :img)";
+    $sql = "INSERT INTO produtos (nome, preco, cat, img, id_usuario)
+            VALUES(:nome, :preco, :cat, :img, :id_usuario)";
     
     $consulta = $conexao->prepare($sql);
 
@@ -19,6 +19,7 @@ function inserirProduto(PDO $conexao, string $nome, float $preco, string $cat, s
     $consulta->bindValue(':preco', $preco);
     $consulta->bindValue(':cat', $cat);
     $consulta->bindValue(':img', $img);
+    $consulta->bindValue('id_usuario', $idUsuario, PDO::PARAM_INT);
 
     $consulta->execute();
 }

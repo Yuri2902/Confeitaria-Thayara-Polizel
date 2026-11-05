@@ -38,6 +38,8 @@ try {
     <?php foreach ($pedidosBanco as $pedido): ?>
         <?php
           $itens = buscarItensDoPedido($conexao, $pedido['id_pedido']);
+          $subtotal = array_sum(array_column($itens, 'preco_total'));
+          $desconto = $subtotal - $pedido['valor_total'];
           $retirada = $pedido['data_entrega'] ? date('d/m/Y', strtotime($pedido['data_entrega'])) : '—';
           $emissao  = date('d/m/Y', strtotime($pedido['data_emissao']));
         ?>
@@ -62,6 +64,17 @@ try {
                     <span>R$ <?= number_format($item['preco_total'], 2, ',', '.') ?></span>
                   </div>
                 <?php endforeach; ?>
+                <div class="linha">
+                    <span>Subtotal</span>
+                    <span>R$ <?= number_format($subtotal, 2, ',', '.') ?></span>
+                </div>
+
+                <?php if ($pedido['desconto_aniversario']): ?>
+                    <div class="linha text-success">
+                        <span>🎁 Desconto Aniversário (10%)</span>
+                        <span>- R$ <?= number_format($desconto, 2, ',', '.') ?></span>
+                    </div>
+                <?php endif; ?>
                 <div class="linha total">
                   <span>Total</span>
                   <span>R$ <?= number_format($pedido['valor_total'], 2, ',', '.') ?></span>

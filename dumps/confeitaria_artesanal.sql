@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
     data_emissao DATE NOT NULL,
     data_entrega DATE NULL,
     valor_total  DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    desconto_aniversario BOOLEAN NOT NULL DEFAULT FALSE,
     id_usuario   INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );

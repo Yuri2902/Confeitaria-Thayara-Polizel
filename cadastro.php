@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($nome) || empty($email) || empty($dataNasc) || empty($endereco) || empty($telefone) || empty($senha)) {
         $erro = "Preencha todos os campos.";
+    } elseif ($dataNasc > date('Y-m-d', strtotime('-14 years'))) {
+    $erro = "É necessário ter pelo menos 14 anos para se cadastrar.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "Informe um e-mail válido.";
     } elseif (strlen($senha) < 6) {
@@ -76,7 +78,7 @@ style="border-color: var(--borda) !important;">
         </div>
         <div class="mb-3">
             <label for="data_nasc" class="form-label">Data de nascimento:</label>
-            <input type="date" name="data_nasc" id="data_nasc" class="form-control" max="<?= date('Y-m-d') ?>" required
+            <input type="date" name="data_nasc" id="data_nasc" class="form-control" max="<?= date('Y-m-d', strtotime('-14 years')) ?>" required
                    value="<?= htmlspecialchars($_POST['data_nasc'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
         </div>
         <div class="mb-3">

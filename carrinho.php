@@ -24,7 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valorTotal = (float) $dados['valor_total'];
     $itens = $dados['itens'];
 
-    $idPedido = finalizarPedido($conexao, $idUsuario, $dataEntrega, $valorTotal, $itens);
+    $temDesconto = !empty($_SESSION['usuario']['data_nasc']) &&
+    date('m-d', strtotime($_SESSION['usuario']['data_nasc'])) === date('m-d');
+
+    $idPedido = finalizarPedido($conexao, $idUsuario, $dataEntrega, $valorTotal, $itens, (int)$temDesconto);
   
     echo json_encode(['id_pedido' => $idPedido]);
     exit;

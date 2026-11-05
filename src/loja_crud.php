@@ -74,13 +74,14 @@ function verificarBloqueioLoja(PDO $conexao): void
     }
 }
 
-function finalizarPedido(PDO $conexao, int $idUsuario, string $dataEntrega, float $valorTotal, array $itens): int
+function finalizarPedido(PDO $conexao, int $idUsuario, string $dataEntrega, float $valorTotal, array $itens, int $descontoAniversario = 0): int
 {
-    $sql = "INSERT INTO pedidos (data_emissao, id_usuario, data_entrega, valor_total) VALUES (CURDATE(), :id_usuario, :data_entrega, :valor_total)";
+    $sql = "INSERT INTO pedidos (data_emissao, id_usuario, data_entrega, valor_total, desconto_aniversario) VALUES (CURDATE(), :id_usuario, :data_entrega, :valor_total, :desconto_aniversario)";
     $consulta = $conexao->prepare($sql);
     $consulta->bindValue(":id_usuario", $idUsuario);
     $consulta->bindValue(":data_entrega", $dataEntrega);
     $consulta->bindValue(":valor_total", $valorTotal);
+    $consulta->bindValue(":desconto_aniversario", $descontoAniversario, PDO::PARAM_INT);
     $consulta->execute();
     $idPedido = $conexao->lastInsertId();
 

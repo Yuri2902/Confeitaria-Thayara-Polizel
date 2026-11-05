@@ -3,7 +3,7 @@
 function buscarPedidos(PDO $conexao): array
 {
     $sql = "SELECT p.id_pedido, p.data_emissao, p.data_entrega, p.valor_total,
-                   u.nome AS cliente_nome, u.email AS cliente_email
+                   p.desconto_aniversario, u.nome AS cliente_nome, u.email AS cliente_email
             FROM pedidos p
             JOIN usuarios u ON u.id = p.id_usuario
             ORDER BY p.id_pedido DESC";
