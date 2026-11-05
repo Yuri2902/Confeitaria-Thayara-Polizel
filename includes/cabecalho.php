@@ -41,9 +41,6 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
       </div>
     <?php endif; ?>
 
-    <!-- TOPO -->
-    <div class="topo-localizacao">📍 Retirada: Rua Zike Tuma 576– São Paulo, SP</div>
-
     <!-- Menu Usuarios -->
     <div class="py-2" style="background-color: var(--marrom-escuro);">
           <div class="container d-flex flex-wrap align-items-center gap-2">
@@ -92,6 +89,9 @@ $lojaAberta = ehAdministrador() ? lojaEstaAberta($conexao) : true; //só consult
         <img src="<?= BASE_URL ?>/fotos/LogoBarra.png" alt="Logo Thayara" onerror="this.style.display='none'">
         Thayara Polizel
       </a>
+      <span class="navbar-localizacao">
+        📍 Retirada: Rua Zike Tuma, 576 – São Paulo, SP
+      </span>
       <button type="button" class="navbar-toggler-thay" onclick="toggleMenu()" aria-label="Menu">☰</button>
       <ul class="nav-links">
         <li><a href="<?= BASE_URL ?>/index.php" class="<?= classeAtiva('index.php', $paginaAtual) ?>">Home</a></li>
